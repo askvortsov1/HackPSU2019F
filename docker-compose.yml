@@ -6,14 +6,12 @@ services:
     env_file:
     - ./.env
   api:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     container_name: api
     env_file:
     - ./.env
     volumes:
-      - ./api/src:/code
+      - ./src:/code
     command: /gunicorn.sh
     depends_on:
       - db
