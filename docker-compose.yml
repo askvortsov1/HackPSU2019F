@@ -1,0 +1,31 @@
+version: "3.4"
+services:
+  db:
+    image: postgres:10.4
+    container_name: db
+    environment:
+      POSTGRES_DB: $DB_NAME
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+  api:
+    build:
+      context: api
+      dockerfile: Dockerfile
+    container_name: api
+    environment:
+      ENV: $ENV
+      HTTPS: 0
+      DJANGO_SECRET_KEY: hhhhhhhhhhhhhh
+      DB_HOST: $DB_HOST
+      DB_USER: $DB_USER
+      DB_PORT: $DB_PORT
+      DB_NAME: $DB_NAME
+      DB_PASSWORD: $DB_PASSWORD
+      DB_BACKEND: $DB_BACKEND
+    volumes:
+      - ./api/src:/code
+    command: /gunicorn.sh
+    depends_on:
+      - db
+    ports:
+      - "80:80"

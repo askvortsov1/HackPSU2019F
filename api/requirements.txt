@@ -1,0 +1,7 @@
+django
+django-rest-framework
+django-rest-auth
+psycopg2
+gunicorn
+
+django-allauth
