@@ -96,7 +96,5 @@ class User(AbstractBaseUser, PermissionsMixin):
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['fname', 'lname', 'birthday', 'country']
-    EXPORTED_FIELDS = ['email', 'fname', 'lname', 'bio', 'birthday', 'country']
-    REQUIRED_SITE_SPECIFIC_FIELDS = ['role']
 
     objects = UserManager()
