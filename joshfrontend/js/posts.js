@@ -1,14 +1,15 @@
 function storeUserData(dataKey) {
-    var userData = {key:dataKey};
     
     $.ajax({
         type: "POST",
         url: "http://hackpsu-fall2019.herokuapp.com/rest-auth/user/",
-        data: userData,
+        headers: {
+            Authorization: "Token " + dataKey
+        },
         success: function (data) {
             console.log("Got data successfully");
-            console.log("data");
-            window.localStorage["curr_user"] = data;
+            console.log(data);
+            window.localStorage.setItem("curr_user", data);
         },
         error: function () {
             console.log("Failed to get data");
@@ -30,8 +31,8 @@ function submitLogin() {
             if(data){
                 console.log("Got token " + data["key"]);
                 document.cookie = "key:" + data["key"];
-                document.location.href = document.location.href.replace('index.html', '') + "pages/main.html";
                 storeUserData(data["key"]);
+                document.location.href = document.location.href.replace('index.html', '') + "pages/main.html";
             }
             else{
                 console.log("Failed user authentication");
@@ -119,6 +120,33 @@ function submitRequest() {
         }
     });
 }
+
+function getRequests(){
+
+    $.ajax({
+        type: "GET",
+        url: "http://hackpsu-fall2019.herokuapp.com/help/requests",
+        success: function (data) {
+            for(i = 0; i < data.length; i ++){
+                helpBody = document.getElementById("helpBody");
+                helpBody.innerHTML += "<form>";
+                helpBody.innerHTML += "<p>" + data[i]["item"] + "</p>";
+                helpBody.innerHTML += "<p>" + data[i]["item_description"] + "</p>";
+                helpBody.innerHTML += "<p>" + data[i]["severity"] + "</p>";
+                helpBody.innerHTML += "<p>" + data[i]["severity_detail"] + "</p>";
+                helpBody.innerHTML += "</form>";
+            }
+        },
+        error: function (e) {
+            alert('Error' + e);
+        }
+    });
+}
+
+function logout(){
+    document.location.href = document.location.href.replace('pages/main.html', 'index.html');
+}
+
 
 function getDateTime(){
     var today = new Date();

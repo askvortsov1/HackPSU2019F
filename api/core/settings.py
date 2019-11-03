@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework_swagger',
     'accounts.apps.AccountsConfig',
-    'request.apps.RequestConfig'
+    'request.apps.RequestConfig',
+    'response.apps.ResponseConfig',
 ]
 
 MIDDLEWARE = [

@@ -7,26 +7,26 @@ from .serializers import HelpResponseSerializer
 
 class HelpResponseViewSet(viewsets.ViewSet):
     """
-    A simple ViewSet for listing or retrieving help requests.
+    A simple ViewSet for listing or retrieving help responses.
     """
 
-    def list(self, request):
+    def list(self, response):
         queryset = HelpResponse.objects.all()
         serializer = HelpResponseSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    def retrieve(self, request, pk=None):
+    def retrieve(self, response, pk=None):
         queryset = HelpResponse.objects.all()
         user = get_object_or_404(queryset, pk=pk)
         serializer = HelpResponseSerializer(user)
         return Response(serializer.data)
 
 
-class HelpRequestCreate(generics.CreateAPIView):
+class HelpResponseCreate(generics.CreateAPIView):
     queryset = HelpResponse.objects.all()
     serializer_class = HelpResponseSerializer
 
 
-class HelpRequestDestroy(generics.DestroyAPIView):
+class HelpResponseDestroy(generics.DestroyAPIView):
     queryset = HelpResponse.objects.all()
     serializer_class = HelpResponseSerializer

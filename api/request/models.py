@@ -24,7 +24,6 @@ class HelpRequest(models.Model):
 
     severity_detail = models.TextField()
 
-    lon = 
 
 
 class AskerReview(models.Model):
