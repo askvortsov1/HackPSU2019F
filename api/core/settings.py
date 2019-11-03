@@ -35,6 +35,7 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     'corsheaders',
+    'rest_framework_swagger',
     'accounts.apps.AccountsConfig',
     'request.apps.RequestConfig'
 ]

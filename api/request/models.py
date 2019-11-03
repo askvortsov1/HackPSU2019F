@@ -12,14 +12,6 @@ class HelpRequest(models.Model):
 
     datetime = models.DateTimeField(default=timezone.now)
 
-    SEVERITIES = (
-        (5, "Extremely Severe"),
-        (4, "Very Severe"),
-        (3, "Moderately Severe"),
-        (2, "Somewhat Severe"),
-        (1, "Not Severe")
-    )
-
-    severity = models.IntegerField(choices=SEVERITIES)
+    severity = models.IntegerField()
 
     severity_detail = models.TextField()

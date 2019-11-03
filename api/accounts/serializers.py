@@ -10,6 +10,7 @@ class RegisterSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
     fname = serializers.CharField(required=True)
     lname = serializers.CharField(required=True)
+    gender = serializers.CharField(required=True)
     birthday = serializers.DateField(required=True)
     password1 = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
@@ -64,5 +65,5 @@ class UserDetailsSerializer(serializers.ModelSerializer):
     """
     class Meta:
         model = get_user_model()
-        fields = ('pk', 'email', 'fname', 'lname', 'birthday')
+        fields = ('pk', 'email', 'fname', 'lname', 'birthday', 'gender')
         read_only_fields = ('email', )

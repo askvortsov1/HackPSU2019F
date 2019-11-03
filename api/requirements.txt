@@ -4,6 +4,8 @@ django-rest-auth
 psycopg2
 dj-database-url
 gunicorn
+django-jet
 django-cors-middleware
+django-rest-swagger
 
 django-allauth
