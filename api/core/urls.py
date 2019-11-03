@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_swagger.views import get_swagger_view
+from accounts.views import email_to_id
 
 schema_view = get_swagger_view(title='Direct Social Good API')
 
@@ -26,5 +27,6 @@ urlpatterns = [
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('help/', include('request.urls')),
     path('help/', include('response.urls')),
-    path('schema/', schema_view)
+    path('schema/', schema_view),
+    path('emailidconverter/', email_to_id),
 ]
