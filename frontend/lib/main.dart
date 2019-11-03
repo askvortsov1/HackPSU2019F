@@ -1,10 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+
+String currentEmail;
+List<NewRequest> allRequests = [];
 
 void main() {
   runApp(MaterialApp(
     title: 'I Need Help',
-    home: LaunchPage(),
+    home: LoginPage(),
   ));
 }
 
@@ -269,6 +273,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                     Map<String, String> headers = {"Content-type": "application/json"};
                     String email = emailController.text;
                     String password = passwordController.text;
+                    currentEmail = email;
                     print(email);
                     print(password);
                     String json = '{"email": "$email", "password": "$password"}';
@@ -284,6 +289,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                     }
                     else
                     {
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => LaunchPage()));
@@ -293,10 +299,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                       .showSnackBar(SnackBar(content: Text('Processing Data')));
                   _makePostRequest();
                 }
-
-
-
-
               },
               child: Text('Submit'),
             ),
@@ -436,21 +438,22 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
   // Note: This is a GlobalKey<FormState>,
   // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
   final severityController = TextEditingController();
   final itemController = TextEditingController();
+  final severityDetailController = TextEditingController();
+  final itemDetailController = TextEditingController();
+
+
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
-    emailController.dispose();
-    passwordController.dispose();
     severityController.dispose();
     itemController.dispose();
+    severityDetailController.dispose();
+    itemDetailController.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -459,7 +462,7 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
       child: ListView(
         children: <Widget>[
           Padding(
-              child: Text('Level of Severity', textAlign: TextAlign.center, textScaleFactor: 2),
+              child: Text('Level of Severity (1-10)', textAlign: TextAlign.center, textScaleFactor: 2),
               padding: const EdgeInsets.symmetric(vertical: 16.0)
           ),
           TextFormField(
@@ -474,102 +477,6 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0)
           ),
-          Text('Item', textAlign: TextAlign.center, textScaleFactor: 2,),
-          TextFormField(
-            controller: itemController,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: RaisedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
-                if (_formKey.currentState.validate()) {
-                  _makePostRequest() async {
-                    // set up POST request arguments
-                    String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/login/';
-                    Map<String, String> headers = {"Content-type": "application/json"};
-                    String email = emailController.text;
-                    String password = passwordController.text;
-                    String severity = severityController.text;
-                    String item = itemController.text;
-                    print(email);
-                    print(password);
-                    String json = '{"email": "$email", "password": "$password", "severity" : "$severity", "item" : "$item"}';
-                    Response response = await post(url, headers: headers, body: json);
-                    int statusCode = response.statusCode;
-                    String body = response.body;
-                    print(body);
-                    print(statusCode);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => RequestDetails()));
-                  }
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                  _makePostRequest();
-                }
-              },
-              child: Text('Submit'),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class RequestDetails extends StatelessWidget{
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Request Details',
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text('Request Details'),
-          ),
-          body: MyCustomFormRequestDetails(),
-        )
-    );
-  }
-}
-class MyCustomFormRequestDetails extends StatefulWidget {
-  @override
-  MyCustomFormStateRequestDetails createState() {
-    return MyCustomFormStateRequestDetails();
-  }
-}
-class MyCustomFormStateRequestDetails extends State<MyCustomFormRequestDetails> {
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
-  //
-  // Note: This is a GlobalKey<FormState>,
-  // not a GlobalKey<MyCustomFormState>.
-  final _formKey = GlobalKey<FormState>();
-  final severityDetailController = TextEditingController();
-  final itemDetailController = TextEditingController();
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    severityDetailController.dispose();
-    itemDetailController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // Build a Form widget using the _formKey created above.
-    return Form(
-      key: _formKey,
-      child: ListView(
-        children: <Widget>[
           Text('Reason for Severity', textAlign: TextAlign.center, textScaleFactor: 2),
           TextFormField(
             controller: severityDetailController,
@@ -582,6 +489,16 @@ class MyCustomFormStateRequestDetails extends State<MyCustomFormRequestDetails> 
           ),
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0)
+          ),
+          Text('Item', textAlign: TextAlign.center, textScaleFactor: 2,),
+          TextFormField(
+            controller: itemController,
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
           ),
           Text('Item Details', textAlign: TextAlign.center, textScaleFactor: 2,),
           TextFormField(
@@ -604,17 +521,21 @@ class MyCustomFormStateRequestDetails extends State<MyCustomFormRequestDetails> 
                     // set up POST request arguments
                     String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/login/';
                     Map<String, String> headers = {"Content-type": "application/json"};
+                    String severity = severityController.text;
+                    String item = itemController.text;
                     String severityDetail = severityDetailController.text;
                     String itemDetail = itemDetailController.text;
-                    String json = '{"severityDetail": "$severityDetail", "itemDetail": "$itemDetail"}';
+                    String json = '{"severity" : "$severity", "item" : "$item", "severityDetail" : "$severityDetail", "itemDetail" : "$itemDetail"}';
                     Response response = await post(url, headers: headers, body: json);
                     int statusCode = response.statusCode;
                     String body = response.body;
+                    allRequests.add(NewRequest(severity, item, severityDetail, itemDetail, currentEmail));
+                    print(allRequests);
                     print(body);
                     print(statusCode);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LaunchPage()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LaunchPage()));
                   }
                   Scaffold.of(context)
                       .showSnackBar(SnackBar(content: Text('Processing Data')));
@@ -624,7 +545,7 @@ class MyCustomFormStateRequestDetails extends State<MyCustomFormRequestDetails> 
               child: Text('Submit'),
             ),
           ),
-        ],
+        ]
       ),
     );
   }
@@ -655,6 +576,8 @@ class ProfilePage extends StatelessWidget {
 }
 
 class SendPage extends StatelessWidget {
+
+  final List<NewRequest> currentRequests = allRequests;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -662,11 +585,41 @@ class SendPage extends StatelessWidget {
         home: Scaffold(
             appBar: AppBar(
               title: Text('Some Requests'),
+            ),
+            body: new ListView.builder
+              (
+                itemCount: allRequests.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return new ListView(
+                    children: <Widget>[
+                      Container(
+                        child: const Center(child: Text('Severity')),
+                      ),
+                      Container(
+                        child: const Center(child: Text('Severity Details')),
+                      ),
+                      Container(
+                        child: const Center(child: Text('Item')),
+                      ),
+                      Container(
+                        child: const Center(child: Text('Item Details')),
+                      ),
+                    ],
+                  );
+                }
             )
         )
     );
   }
 }
 
-
-// Create a Form widget.
+class NewRequest{
+  String severity, item, severityDetail, itemDetail, userEmail;
+  NewRequest(String severity, item, severityDetail, itemDetail, userEmail){
+    this.severity = severity;
+    this.item = item;
+    this.severityDetail = severity;
+    this.itemDetail = itemDetail;
+    this.userEmail = userEmail;
+  }
+}

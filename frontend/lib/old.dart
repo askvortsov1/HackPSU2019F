@@ -103,6 +103,7 @@ class LaunchPage extends StatelessWidget {
 }
 
 class PrimaryRequest extends StatelessWidget{
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -128,9 +129,6 @@ class PrimaryRequest extends StatelessWidget{
       ),
           Column(
             children: <Widget>[
-              ListTile(
-                title: Text('Severity of Situation', textScaleFactor: 1.1, textAlign: TextAlign.center,),
-              ),
               ListTile(
                 title: Text('High'),
               ),
