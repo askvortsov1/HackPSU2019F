@@ -3,10 +3,10 @@ from .views import HelpRequestViewSet, HelpRequestCreate, HelpRequestDestroy
 from django.urls import path
 
 
-router = DefaultRouter()
-router.register(r'requests', HelpRequestViewSet, basename='user')
-urlpatterns = router.urls
-urlpatterns += [
+urlpatterns = [
     path('requests/create/', HelpRequestCreate),
     path('requests/destroy/', HelpRequestDestroy),
 ]
+router = DefaultRouter()
+router.register(r'requests', HelpRequestViewSet, basename='user')
+urlpatterns += router.urls
