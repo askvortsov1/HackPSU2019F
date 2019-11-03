@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class HelpConfig(AppConfig):
-    name = 'help'
+class ResponseConfig(AppConfig):
+    name = 'response'
