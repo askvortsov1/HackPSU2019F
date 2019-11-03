@@ -1,0 +1,14 @@
+.container{
+    padding:3rem;
+}
+
+.btn-big{
+    width:75%;
+    border:2px solid #2e3ae7;
+    background-color:white;
+    height:5rem;
+}
+
+.btn-big:hover{
+    background-color:#eeeeee;
+}

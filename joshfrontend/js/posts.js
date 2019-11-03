@@ -1,4 +1,20 @@
-function submitLogin(){
+function storeUserData() {
+    $.ajax({
+        type: "POST",
+        url: "http://hackpsu-fall2019.herokuapp.com/rest-auth/user/",
+        success: function (data) {
+            console.log("Got data successfully");
+            console.log("data");
+            window.localStorage["curr_user"] = data;
+        },
+        error: function () {
+            console.log("Failed to get data");
+        }
+    });
+}
+
+
+function submitLogin() {
     var loginData =
         {email: document.getElementById('loginFormEmail').value,password:document.getElementById('loginFormPassword').value};
 
@@ -11,7 +27,8 @@ function submitLogin(){
             if(data){
                 console.log("Got token " + data["key"]);
                 document.cookie = "key:" + data["key"];
-                document.location.href = document.location.href.replace('index.html','') + "pages/main.html";
+                document.location.href = document.location.href.replace('index.html', '') + "pages/main.html";
+                storeUserData();
             }
             else{
                 console.log("Failed user authentication");
@@ -64,21 +81,6 @@ function submitRegister(){
         error: function () {
             console.log("Failed user registration");
             document.getElementById('registerFailText').style.display = 'block';
-        }
-    });
-}
-
-function storeUserData(){
-    $.ajax({
-        type: "POST",
-        url: "http://hackpsu-fall2019.herokuapp.com/rest-auth/user/",
-        success: function (data) {
-            console.log("Got data successfully");
-            console.log("data");
-            window.localStorage["curr_user"] = data;
-        },
-        error: function () {
-            console.log("Failed to get data");
         }
     });
 }
