@@ -26,7 +26,7 @@ SECRET_KEY = 's39u#0-dyk)smta&&cvez_wuko#2k(*9ruvxnajm1%rc-0gj)q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['hackpsu-fall2019.herokuapp.com']
 
 SITE_ID = 1
 
