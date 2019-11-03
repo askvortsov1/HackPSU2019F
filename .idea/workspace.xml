@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e633d2b-3b23-4a30-b772-99c883394567" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/HackPSU2019F.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/HackPSU2019F.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/lib/old.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lib/old.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +21,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
+            <state relative-caret-position="102">
+              <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
                 <element signature="e#508#595#0" />
@@ -79,6 +77,9 @@
       <find>MM</find>
       <find>email</find>
       <find>controller</find>
+      <find>Register</find>
+      <find>Login</find>
+      <find>LoginPage</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -173,6 +174,14 @@
       <option name="presentableId" value="Default" />
       <updated>1572748352197</updated>
     </task>
+    <task id="LOCAL-00001" summary="Added registry page">
+      <created>1572752305213</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1572752305213</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -212,6 +221,10 @@
       <window_info anchor="right" id="Palette&#9;" />
     </layout>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added registry page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added registry page" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/frontend/lib/old.dart">
       <provider selected="true" editor-type-id="text-editor">
@@ -237,8 +250,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="179" lean-forward="true" selection-start-line="179" selection-end-line="179" />
+        <state relative-caret-position="102">
+          <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
             <element signature="e#508#595#0" />
