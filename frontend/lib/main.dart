@@ -445,6 +445,9 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
 
 
 
+  int severity;
+  String item;
+
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -457,6 +460,7 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
+<<<<<<< HEAD
     return Form(
       key: _formKey,
       child: ListView(
@@ -491,6 +495,149 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
               padding: const EdgeInsets.symmetric(vertical: 16.0)
           ),
           Text('Item', textAlign: TextAlign.center, textScaleFactor: 2,),
+=======
+    return MaterialApp(
+      title: 'Request Page',
+      home: Scaffold(
+          body: ListView(
+            children: ListTile.divideTiles(
+              context: context,
+              tiles: [
+
+//                Container(
+//                    color: Colors.grey[200],
+//                    child: ListTile(
+//                        title: Center(
+//                          child: Text('Go Back', style: TextStyle(fontWeight: FontWeight.bold)),
+//                        ),
+//                        onTap: (){
+//                          Navigator.pop(context);
+//                        }
+//                    )
+//                ),
+
+                Column(
+                  children: <Widget>[
+                    ListTile(
+                      title: Text('Severity of Situation', textScaleFactor: 1.1, textAlign: TextAlign.center,),
+                    ),
+                    CheckboxListTile(
+//                      onChanged: (bool checked) {
+//                        severity = 3;
+//                    },
+                      title: Text('High'),
+
+                    ),
+                    ListTile(
+                      title: Text('Medium'),
+                    ),
+                    ListTile(
+                      title: Text('Low'),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    ListTile(
+                      title: Text('Items', textScaleFactor: 1.1, textAlign: TextAlign.center,),
+                    ),
+                    ListTile(
+                      title: Text('Food/water'),
+                    ),
+                    ListTile(
+                      title: Text('Clothing'),
+                    ),
+                    ListTile(
+                      title: Text('Shelter'),
+                    ),
+                    ListTile(
+                      title: Text('Toiletries'),
+                    ),
+                    Container(
+                        color: Colors.grey[200],
+                        child: ListTile(
+                          title: Center(
+                            child: Text('Next', style: TextStyle(fontWeight: FontWeight.bold)),
+                          ),
+                          onTap: () {
+                            //NewRequest n1 = new NewRequest()
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => RequestDetails()),
+                            );
+
+                          },
+                        )
+                    ),
+                  ],
+                )
+              ],
+            ).toList(),
+          )
+
+      ),
+    );
+
+  }
+}
+class NewRequest {
+  @override
+  int severity;
+  String item;
+
+  NewRequest(int severity, String item) {
+    this.severity = severity;
+    this.item = item;
+  }
+}
+
+class RequestDetails extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Request Details',
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text('Request Details'),
+          ),
+          body: MyCustomFormRequestDetails(),
+        )
+    );
+  }
+}
+class MyCustomFormRequestDetails extends StatefulWidget {
+  @override
+  MyCustomFormStateRequestDetails createState() {
+    return MyCustomFormStateRequestDetails();
+  }
+}
+class MyCustomFormStateRequestDetails extends State<MyCustomFormRequestDetails> {
+  // Create a global key that uniquely identifies the Form widget
+  // and allows validation of the form.
+  //
+  // Note: This is a GlobalKey<FormState>,
+  // not a GlobalKey<MyCustomFormState>.
+  final _formKey = GlobalKey<FormState>();
+  final severityDetailController = TextEditingController();
+  final itemDetailController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    severityDetailController.dispose();
+    itemDetailController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Build a Form widget using the _formKey created above.
+    return Form(
+      key: _formKey,
+      child: ListView(
+        children: <Widget>[
+          Text('Situation Details', textAlign: TextAlign.center, textScaleFactor: 2),
+>>>>>>> 6892dcb8f6c0e3a1bd04a7845b0ffff4ad878c71
           TextFormField(
             controller: itemController,
             validator: (value) {
