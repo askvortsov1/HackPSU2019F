@@ -6,6 +6,10 @@ from django.utils import timezone
 class HelpRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    item = models.CharField(max_length=100)
+
+    item_description = models.TextField()
+
     datetime = models.DateTimeField(default=timezone.now)
 
     SEVERITIES = (
@@ -18,4 +22,4 @@ class HelpRequest(models.Model):
 
     severity = models.IntegerField(choices=SEVERITIES)
 
-    description = models.TextField()
+    severity_detail = models.TextField()
