@@ -41,6 +41,7 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final password2Controller = TextEditingController();
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final birthdateController = TextEditingController();
@@ -52,6 +53,7 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
     final controllers = [
       emailController,
       passwordController,
+      password2Controller,
       firstNameController,
       lastNameController,
       birthdateController,
@@ -60,7 +62,6 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
     for (final controller in controllers){
       controller.dispose();
     }
-
     super.dispose();
   }
 
@@ -69,10 +70,11 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
     // Build a Form widget using the _formKey created above.
     return Form(
       key: _formKey,
-      child:
-      ListView(
+      child: Container(
+          padding: EdgeInsets.all(8.0),
+          margin: new EdgeInsets.symmetric(horizontal: 16.0),
+          child: ListView(
         children: <Widget>[
-          Text('Email', textAlign: TextAlign.center, textScaleFactor: 2),
           TextFormField(
             controller: emailController,
             validator: (value) {
@@ -82,10 +84,7 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
               return null;
             },
           ),
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0)
-          ),
-          Text('Password', textAlign: TextAlign.center, textScaleFactor: 2,),
+          Text('Email', textAlign: TextAlign.left, textScaleFactor: 1.2),
           TextFormField(
             obscureText: true,
             controller: passwordController,
@@ -96,7 +95,18 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
               return null;
             },
           ),
-          Text('First Name', textAlign: TextAlign.center, textScaleFactor: 2,),
+          Text('Password', textAlign: TextAlign.left, textScaleFactor: 1.2),
+          TextFormField(
+            obscureText: true,
+            controller: password2Controller,
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          Text('Confirm Password', textAlign: TextAlign.left, textScaleFactor: 1.2),
           TextFormField(
             controller: firstNameController,
             validator: (value) {
@@ -106,7 +116,7 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
               return null;
             },
           ),
-          Text('Last Name', textAlign: TextAlign.center, textScaleFactor: 2,),
+          Text('First Name', textAlign: TextAlign.left, textScaleFactor: 1.2),
           TextFormField(
             controller: lastNameController,
             validator: (value) {
@@ -116,26 +126,27 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
               return null;
             },
           ),
-          Text('Birthdate', textAlign: TextAlign.center, textScaleFactor: 2,),
+          Text('Last Name', textAlign: TextAlign.left, textScaleFactor: 1.2),
           TextFormField(
-            controller: firstNameController,
+            controller: birthdateController,
             validator: (value) {
               if (value.isEmpty) {
-                return 'MM-DD-YYYY';
+                return 'YYYY-MM-DD';
               }
               return null;
             },
           ),
-          Text('Gender', textAlign: TextAlign.center, textScaleFactor: 2,),
+          Text('Birthdate', textAlign: TextAlign.left, textScaleFactor: 1.2),
           TextFormField(
-            controller: firstNameController,
+            controller: genderController,
             validator: (value) {
               if (value.isEmpty) {
-                return 'Male_Female';
+                return 'Male/Female';
               }
               return null;
             },
           ),
+          Text('Gender', textAlign: TextAlign.left, textScaleFactor: 1.2),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: RaisedButton(
@@ -145,17 +156,18 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
                 if (_formKey.currentState.validate()) {
                   _makePostRequest() async {
                     // set up POST request arguments
-                    String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/login/';
+                    String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/registration/';
                     Map<String, String> headers = {"Content-type": "application/json"};
                     String email = emailController.text;
                     String password = passwordController.text;
+                    String password2 = password2Controller.text;
                     String firstName = firstNameController.text;
                     String lastName = lastNameController.text;
                     String birthdate = birthdateController.text;
                     String gender = genderController.text;
                     print(email);
                     print(password);
-                    String json = '{"email": "$email","password": "$password", "firstName" : "$firstName","lastName" : "$lastName","birthdate" : "$birthdate","gender" : "$gender"}';
+                    String json = '{"email": "$email","password1": "$password","password2": "$password2", "fname" : "$firstName","lname" : "$lastName","birthday" : "$birthdate","gender" : "$gender"}';
                     Response response = await post(url, headers: headers, body: json);
                     int statusCode = response.statusCode;
                     String body = response.body;
@@ -183,6 +195,7 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
           ),
         ],
       ),
+      )
     );
   }
 }
@@ -232,7 +245,6 @@ class MyCustomFormState extends State<MyCustomForm> {
       key: _formKey,
       child: ListView(
         children: <Widget>[
-          Text('Email', textAlign: TextAlign.center, textScaleFactor: 2),
           TextFormField(
             controller: emailController,
             validator: (value) {
@@ -242,10 +254,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               return null;
             },
           ),
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0)
-          ),
-          Text('Password', textAlign: TextAlign.center, textScaleFactor: 2,),
+          Text('Email', textAlign: TextAlign.center, textScaleFactor: 1.2),
           TextFormField(
             obscureText: true,
             controller: passwordController,
@@ -256,6 +265,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               return null;
             },
           ),
+          Text('Password', textAlign: TextAlign.center, textScaleFactor: 1.2),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: RaisedButton(
@@ -455,94 +465,98 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
     // Build a Form widget using the _formKey created above.
     return Form(
       key: _formKey,
-      child: ListView(
-        children: <Widget>[
-          Padding(
-              child: Text('Level of Severity (1-10)', textAlign: TextAlign.center, textScaleFactor: 2),
-              padding: const EdgeInsets.symmetric(vertical: 16.0)
-          ),
-          TextFormField(
-            controller: severityController,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter  some text';
-              }
-              return null;
-            },
-          ),
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0)
-          ),
-          Text('Reason for Severity', textAlign: TextAlign.center, textScaleFactor: 2),
-          TextFormField(
-            controller: severityDetailController,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter  some text';
-              }
-              return null;
-            },
-          ),
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0)
-          ),
-          Text('Item', textAlign: TextAlign.center, textScaleFactor: 2,),
-          TextFormField(
-            controller: itemController,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          Text('Item Details', textAlign: TextAlign.center, textScaleFactor: 2,),
-          TextFormField(
-            controller: itemDetailController,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: RaisedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
-                if (_formKey.currentState.validate()) {
-                  _makePostRequest() async {
-                    // set up POST request arguments
-                    String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/login/';
-                    Map<String, String> headers = {"Content-type": "application/json"};
-                    String severity = severityController.text;
-                    String item = itemController.text;
-                    String severityDetail = severityDetailController.text;
-                    String itemDetail = itemDetailController.text;
-                    String json = '{"severity" : "$severity", "item" : "$item", "severityDetail" : "$severityDetail", "itemDetail" : "$itemDetail"}';
-                    Response response = await post(url, headers: headers, body: json);
-                    int statusCode = response.statusCode;
-                    String body = response.body;
-                    allRequests.add(NewRequest(severity, item, severityDetail, itemDetail, currentEmail));
-                    print(allRequests);
-                    print(body);
-                    print(statusCode);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LaunchPage()));
-                  }
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                  _makePostRequest();
-                }
-              },
-              child: Text('Submit'),
-            ),
-          ),
-        ]
-      ),
+      child: Container(
+        padding: EdgeInsets.all(8.0),
+        margin: new EdgeInsets.symmetric(horizontal: 16.0),
+        child: ListView(
+      children: <Widget>[
+      Padding(
+          child: Text('Level of Severity (1-10)', textAlign: TextAlign.center, textScaleFactor: 2),
+        padding: const EdgeInsets.symmetric(vertical: 16.0)
+    ),
+    TextFormField(
+    controller: severityController,
+    validator: (value) {
+    if (value.isEmpty) {
+    return 'Please enter  some text';
+    }
+    return null;
+    },
+    ),
+    Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0)
+    ),
+    Text('Reason for Severity', textAlign: TextAlign.center, textScaleFactor: 2),
+    TextFormField(
+    controller: severityDetailController,
+    validator: (value) {
+    if (value.isEmpty) {
+    return 'Please enter  some text';
+    }
+    return null;
+    },
+    ),
+    Padding(
+    padding: const EdgeInsets.symmetric(vertical: 16.0)
+    ),
+    Text('Item', textAlign: TextAlign.center, textScaleFactor: 2,),
+    TextFormField(
+    controller: itemController,
+    validator: (value) {
+    if (value.isEmpty) {
+    return 'Please enter some text';
+    }
+    return null;
+    },
+    ),
+    Text('Item Details', textAlign: TextAlign.center, textScaleFactor: 2,),
+    TextFormField(
+    controller: itemDetailController,
+    validator: (value) {
+    if (value.isEmpty) {
+    return 'Please enter some text';
+    }
+    return null;
+    },
+    ),
+    Padding(
+    padding: const EdgeInsets.symmetric(vertical: 16.0),
+    child: RaisedButton(
+    onPressed: () {
+    // Validate returns true if the form is valid, or false
+    // otherwise.
+    if (_formKey.currentState.validate()) {
+    _makePostRequest() async {
+    // set up POST request arguments
+    String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/login/';
+    Map<String, String> headers = {"Content-type": "application/json"};
+    String severity = severityController.text;
+    String item = itemController.text;
+    String severityDetail = severityDetailController.text;
+    String itemDetail = itemDetailController.text;
+    String json = '{"severity" : "$severity", "item" : "$item", "severityDetail" : "$severityDetail", "itemDetail" : "$itemDetail"}';
+    Response response = await post(url, headers: headers, body: json);
+    int statusCode = response.statusCode;
+    String body = response.body;
+    allRequests.add(NewRequest(severity, item, severityDetail, itemDetail, currentEmail));
+    print(allRequests);
+    print(body);
+    print(statusCode);
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => LaunchPage()));
+    }
+    Scaffold.of(context)
+        .showSnackBar(SnackBar(content: Text('Processing Data')));
+    _makePostRequest();
+    }
+    },
+    child: Text('Submit'),
+    ),
+    ),
+    ]
+    ),
+      )
     );
   }
 }
