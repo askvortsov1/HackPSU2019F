@@ -247,6 +247,7 @@ class MyCustomFormState extends State<MyCustomForm> {
           ),
           Text('Password', textAlign: TextAlign.center, textScaleFactor: 2,),
           TextFormField(
+            obscureText: true,
             controller: passwordController,
             validator: (value) {
               if (value.isEmpty) {
@@ -312,15 +313,15 @@ class LaunchPage extends StatelessWidget {
     return MaterialApp(
       title: 'Give and Get Help',
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Give and Get Help'),
-        ),
         body: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const Image(
-                image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+              Padding(
+                child: Image(
+                  image: NetworkImage('https://raw.githubusercontent.com/askvortsov1/HackPSU2019F/master/frontend/lib/I%20Help.png'),
+                ),
+          padding: const EdgeInsets.symmetric(vertical: 16.0)
               ),
               RaisedButton(
                 onPressed: () {
@@ -343,7 +344,7 @@ class LaunchPage extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.all(10.0),
                   child: const Text(
-                      'Request Help',
+                      'Get Help',
                       style: TextStyle(fontSize: 20)
                   ),
                 ),
@@ -369,7 +370,7 @@ class LaunchPage extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.all(10.0),
                   child: const Text(
-                      'Send Help',
+                      'Give Help',
                       style: TextStyle(fontSize: 20)
                   ),
                 ),
@@ -415,7 +416,7 @@ class PrimaryRequest extends StatelessWidget{
         title: 'Primary Request',
         home: Scaffold(
           appBar: AppBar(
-            title: Text('Request Help'),
+            title: Text('Get Help'),
           ),
           body: MyCustomFormPrimaryRequest(),
         )
@@ -457,7 +458,10 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
       key: _formKey,
       child: ListView(
         children: <Widget>[
-          Text('Level of Severity', textAlign: TextAlign.center, textScaleFactor: 2),
+          Padding(
+              child: Text('Level of Severity', textAlign: TextAlign.center, textScaleFactor: 2),
+              padding: const EdgeInsets.symmetric(vertical: 16.0)
+          ),
           TextFormField(
             controller: severityController,
             validator: (value) {
@@ -468,7 +472,7 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
             },
           ),
           Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0)
+              padding: const EdgeInsets.symmetric(vertical: 8.0)
           ),
           Text('Item', textAlign: TextAlign.center, textScaleFactor: 2,),
           TextFormField(
@@ -630,8 +634,22 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Profile',
-        home: Text("Profile"),
+      title: 'Profile',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Profile'),
+        ),
+        body: ListView(
+          children: <Widget>[
+            ListTile(
+              title: Text("Request 1")
+            ),
+            ListTile(
+                title: Text("Request 2")
+            ),
+          ],
+        )
+      ),
     );
   }
 }
@@ -641,9 +659,14 @@ class SendPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Send Help',
-        home: Text("Send some help"),
+        home: Scaffold(
+            appBar: AppBar(
+              title: Text('Some Requests'),
+            )
+        )
     );
   }
 }
+
 
 // Create a Form widget.
