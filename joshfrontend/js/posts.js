@@ -9,7 +9,7 @@ function submitLogin(){
         data: loginData,
         success: function (data) {
             if(data){
-                console.log("Got token " + data[key]);
+                console.log("Got token " + data["key"]);
                 document.location.href = document.location.href.replace('index.html','') + "pages/main.html";
             }
             else{
@@ -19,7 +19,8 @@ function submitLogin(){
             console.log("Return data was : " + data);
         },
         error: function () {
-            alert('Error');
+            console.log("Failed user authentication");
+            document.getElementById('loginFailText').style.display = 'block';
         }
     });
 }
