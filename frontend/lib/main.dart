@@ -57,7 +57,7 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
       firstNameController,
       lastNameController,
       birthdateController,
-      genderController
+      genderController,
     ];
     for (final controller in controllers){
       controller.dispose();
