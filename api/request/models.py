@@ -1,3 +1,21 @@
 from django.db import models
+from accounts.models import User
+from django.utils import timezone
 
-# Create your models here.
+
+class HelpRequest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    datetime = models.DateTimeField(default=timezone.now)
+
+    SEVERITIES = (
+        (5, "Extremely Severe"),
+        (4, "Very Severe"),
+        (3, "Moderately Severe"),
+        (2, "Somewhat Severe"),
+        (1, "Not Severe")
+    )
+
+    severity = models.IntegerField(choices=SEVERITIES)
+
+    description = models.TextField()

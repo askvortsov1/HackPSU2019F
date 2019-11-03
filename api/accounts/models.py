@@ -95,6 +95,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     # Model Config
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['fname', 'lname', 'birthday', 'country']
+    REQUIRED_FIELDS = ['fname', 'lname', 'birthday']
 
     objects = UserManager()
