@@ -15,7 +15,7 @@ RUN sed -i 's/\r//' /gunicorn.sh
 RUN chmod +x /entrypoint.sh
 RUN chmod +x /gunicorn.sh
 
-COPY ./src /code
+COPY . /code
 WORKDIR /code
 
 ENTRYPOINT ["/entrypoint.sh"]

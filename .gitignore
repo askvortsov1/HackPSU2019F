@@ -2,3 +2,5 @@
 *.vscode
 *.pytest_cache
 **/static/*
+
+*.sqlite3
