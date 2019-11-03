@@ -1,7 +1,10 @@
-function storeUserData() {
+function storeUserData(dataKey) {
+    var userData = {key:dataKey};
+    
     $.ajax({
         type: "POST",
         url: "http://hackpsu-fall2019.herokuapp.com/rest-auth/user/",
+        data: userData,
         success: function (data) {
             console.log("Got data successfully");
             console.log("data");
@@ -28,7 +31,7 @@ function submitLogin() {
                 console.log("Got token " + data["key"]);
                 document.cookie = "key:" + data["key"];
                 document.location.href = document.location.href.replace('index.html', '') + "pages/main.html";
-                storeUserData();
+                storeUserData(data["key"]);
             }
             else{
                 console.log("Failed user authentication");
@@ -83,4 +86,43 @@ function submitRegister(){
             document.getElementById('registerFailText').style.display = 'block';
         }
     });
+}
+
+function submitRequest() {
+
+    var requestData =
+        {
+            user: window.localStorage["curr_user"]["id"],
+            item: document.getElementById('requestItem').value,
+            item_description: document.getElementById('requestDetails').value,
+            severity: document.getElementById('requestUrgency').value,
+            severity_detail: document.getElementById('requestSeverity').value
+        };
+
+    $.ajax({
+        type: "POST",
+        url: "http://hackpsu-fall2019.herokuapp.com/rest-auth/help/requests/",
+        dataType: "json",
+        data: requestData,
+        success: function (data) {
+            if(data){
+                document.getElementById('requestFailText').innerHTML = "Successfully created request!";
+                document.getElementById('requestFailText').style.display = 'block';
+            }
+            else{
+                document.getElementById('requestFailText').style.display = 'block';
+            }
+            console.log("Return data was : " + data);
+        },
+        error: function () {
+            document.getElementById('requestFailText').style.display = 'block';
+        }
+    });
+}
+
+function getDateTime(){
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
 }

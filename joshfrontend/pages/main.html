@@ -65,7 +65,7 @@
             <div class="modal-body">
               <form onsubmit="return false;">
                 <div class="form-group">
-                  <label for="requestUrgency">Urgency</label>
+                  <label for="requestUrgency">Severity</label>
                   <select id="requestUrgency" class="form-control">
                     <option value="1">1 (Not Very)</option>
                     <option value="2">2</option>
@@ -79,6 +79,10 @@
                     <option value="10">10 (Very)</option>
                   </select>
                 </div>
+                <div class="form-group">
+                    <label for="requestSeverity">Explain the Severity</label>
+                    <textarea rows="2" cols="50" class="form-control" id="requestSeverity"></textarea>
+                  </div>
                 <div class="form-group">
                   <label for="requestItem">Required Items</label>
                   <select id="requestItem" class="form-control">
