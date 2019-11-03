@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from rest_framework.response import Response
 from .models import HelpRequest
 from .serializers import HelpRequestSerializer
@@ -20,3 +20,13 @@ class HelpRequestViewSet(viewsets.ViewSet):
         user = get_object_or_404(queryset, pk=pk)
         serializer = HelpRequestSerializer(user)
         return Response(serializer.data)
+
+
+class HelpRequestCreate(generics.CreateAPIView):
+    queryset = HelpRequest.objects.all()
+    serializer_class = HelpRequestSerializer
+
+
+class HelpRequestDestroy(generics.DestroyAPIView):
+    queryset = HelpRequest.objects.all()
+    serializer_class = HelpRequestSerializer

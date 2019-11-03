@@ -69,133 +69,142 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
     return Form(
-      key: _formKey,
-      child: Container(
+        key: _formKey,
+        child: Container(
           padding: EdgeInsets.all(8.0),
           margin: new EdgeInsets.symmetric(horizontal: 16.0),
           child: ListView(
-        children: <Widget>[
-          TextFormField(
-            controller: emailController,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter  some text';
-              }
-              return null;
-            },
-          ),
-          Text('Email', textAlign: TextAlign.left, textScaleFactor: 1.2),
-          TextFormField(
-            obscureText: true,
-            controller: passwordController,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          Text('Password', textAlign: TextAlign.left, textScaleFactor: 1.2),
-          TextFormField(
-            obscureText: true,
-            controller: password2Controller,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          Text('Confirm Password', textAlign: TextAlign.left, textScaleFactor: 1.2),
-          TextFormField(
-            controller: firstNameController,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter first name';
-              }
-              return null;
-            },
-          ),
-          Text('First Name', textAlign: TextAlign.left, textScaleFactor: 1.2),
-          TextFormField(
-            controller: lastNameController,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter last name';
-              }
-              return null;
-            },
-          ),
-          Text('Last Name', textAlign: TextAlign.left, textScaleFactor: 1.2),
-          TextFormField(
-            controller: birthdateController,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'YYYY-MM-DD';
-              }
-              return null;
-            },
-          ),
-          Text('Birthdate', textAlign: TextAlign.left, textScaleFactor: 1.2),
-          TextFormField(
-            controller: genderController,
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Male/Female';
-              }
-              return null;
-            },
-          ),
-          Text('Gender', textAlign: TextAlign.left, textScaleFactor: 1.2),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: RaisedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
-                if (_formKey.currentState.validate()) {
-                  _makePostRequest() async {
-                    // set up POST request arguments
-                    String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/registration/';
-                    Map<String, String> headers = {"Content-type": "application/json"};
-                    String email = emailController.text;
-                    String password = passwordController.text;
-                    String password2 = password2Controller.text;
-                    String firstName = firstNameController.text;
-                    String lastName = lastNameController.text;
-                    String birthdate = birthdateController.text;
-                    String gender = genderController.text;
-                    print(email);
-                    print(password);
-                    String json = '{"email": "$email","password1": "$password","password2": "$password2", "fname" : "$firstName","lname" : "$lastName","birthday" : "$birthdate","gender" : "$gender"}';
-                    Response response = await post(url, headers: headers, body: json);
-                    int statusCode = response.statusCode;
-                    String body = response.body;
-                    print(body);
-                    print(statusCode);
-                    if (statusCode == 400)
-                    {
-                      Scaffold.of(context)
-                          .showSnackBar(SnackBar(content: Text('Unsuccessful')));
-                    }
-                    else
-                    {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LoginPage()));
-                    }
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'someone@example.com'
+                ),
+                controller: emailController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter  some text';
                   }
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                  _makePostRequest();
-                }
-              },
-              child: Text('Submit'),
-            ),
+                  return null;
+                },
+              ),
+              Text('Email', textAlign: TextAlign.left, textScaleFactor: 1.2),
+              TextFormField(
+                obscureText: true,
+                controller: passwordController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+              ),
+              Text('Password', textAlign: TextAlign.left, textScaleFactor: 1.2),
+              TextFormField(
+                obscureText: true,
+                controller: password2Controller,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter some text';
+                  }
+                  return null;
+                },
+              ),
+              Text('Confirm Password', textAlign: TextAlign.left, textScaleFactor: 1.2),
+              TextFormField(
+                controller: firstNameController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter first name';
+                  }
+                  return null;
+                },
+              ),
+              Text('First Name', textAlign: TextAlign.left, textScaleFactor: 1.2),
+              TextFormField(
+                controller: lastNameController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter last name';
+                  }
+                  return null;
+                },
+              ),
+              Text('Last Name', textAlign: TextAlign.left, textScaleFactor: 1.2),
+              TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'YYYY-MM-DD'
+                ),
+                controller: birthdateController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'YYYY-MM-DD';
+                  }
+                  return null;
+                },
+              ),
+              Text('Birthdate', textAlign: TextAlign.left, textScaleFactor: 1.2),
+              TextFormField(
+                decoration: InputDecoration(
+                    labelText: 'Male/Female'
+                ),
+                controller: genderController,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Male/Female';
+                  }
+                  return null;
+                },
+              ),
+              Text('Gender', textAlign: TextAlign.left, textScaleFactor: 1.2),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: RaisedButton(
+                  onPressed: () {
+                    // Validate returns true if the form is valid, or false
+                    // otherwise.
+                    if (_formKey.currentState.validate()) {
+                      _makePostRequest() async {
+                        // set up POST request arguments
+                        String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/registration/';
+                        Map<String, String> headers = {"Content-type": "application/json"};
+                        String email = emailController.text;
+                        String password = passwordController.text;
+                        String password2 = password2Controller.text;
+                        String firstName = firstNameController.text;
+                        String lastName = lastNameController.text;
+                        String birthdate = birthdateController.text;
+                        String gender = genderController.text;
+                        print(email);
+                        print(password);
+                        String json = '{"email": "$email","password1": "$password","password2": "$password2", "fname" : "$firstName","lname" : "$lastName","birthday" : "$birthdate","gender" : "$gender"}';
+                        Response response = await post(url, headers: headers, body: json);
+                        int statusCode = response.statusCode;
+                        String body = response.body;
+                        print(body);
+                        print(statusCode);
+                        if (statusCode == 400)
+                        {
+                          Scaffold.of(context)
+                              .showSnackBar(SnackBar(content: Text('Unsuccessful')));
+                        }
+                        else
+                        {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => LoginPage()));
+                        }
+                      }
+                      Scaffold.of(context)
+                          .showSnackBar(SnackBar(content: Text('Processing Data')));
+                      _makePostRequest();
+                    }
+                  },
+                  child: Text('Submit'),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      )
+        )
     );
   }
 }
@@ -246,6 +255,9 @@ class MyCustomFormState extends State<MyCustomForm> {
       child: ListView(
         children: <Widget>[
           TextFormField(
+            decoration: InputDecoration(
+                labelText: 'someone@example.com'
+            ),
             controller: emailController,
             validator: (value) {
               if (value.isEmpty) {
@@ -254,8 +266,9 @@ class MyCustomFormState extends State<MyCustomForm> {
               return null;
             },
           ),
-          Text('Email', textAlign: TextAlign.center, textScaleFactor: 1.2),
+          Text('Email', textAlign: TextAlign.left, textScaleFactor: 1.2),
           TextFormField(
+
             obscureText: true,
             controller: passwordController,
             validator: (value) {
@@ -265,48 +278,56 @@ class MyCustomFormState extends State<MyCustomForm> {
               return null;
             },
           ),
-          Text('Password', textAlign: TextAlign.center, textScaleFactor: 1.2),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: RaisedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false
-                // otherwise.
-                if (_formKey.currentState.validate()) {
-                  _makePostRequest() async {
-                    // set up POST request arguments
-                    String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/login/';
-                    Map<String, String> headers = {"Content-type": "application/json"};
-                    String email = emailController.text;
-                    String password = passwordController.text;
-                    currentEmail = email;
-                    print(email);
-                    print(password);
-                    String json = '{"email": "$email", "password": "$password"}';
-                    Response response = await post(url, headers: headers, body: json);
-                    int statusCode = response.statusCode;
-                    String body = response.body;
-                    print(body);
-                    print(statusCode);
-                    if (statusCode == 400)
-                    {
-                      Scaffold.of(context)
-                          .showSnackBar(SnackBar(content: Text('Unsuccessful')));
-                    }
-                    else
-                    {
-
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => LaunchPage()));
-                    }
+          Text('Password', textAlign: TextAlign.left, textScaleFactor: 1.2),
+          RaisedButton(
+            onPressed: () {
+              // Validate returns true if the form is valid, or false
+              // otherwise.
+              if (_formKey.currentState.validate()) {
+                _makePostRequest() async {
+                  // set up POST request arguments
+                  String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/login/';
+                  Map<String, String> headers = {"Content-type": "application/json"};
+                  String email = emailController.text;
+                  String password = passwordController.text;
+                  currentEmail = email;
+                  print(email);
+                  print(password);
+                  String json = '{"email": "$email", "password": "$password"}';
+                  Response response = await post(url, headers: headers, body: json);
+                  int statusCode = response.statusCode;
+                  String body = response.body;
+                  print(body);
+                  print(statusCode);
+                  if (statusCode == 400)
+                  {
+                    Scaffold.of(context)
+                        .showSnackBar(SnackBar(content: Text('Unsuccessful')));
                   }
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                  _makePostRequest();
+                  else
+                  {
+
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LaunchPage()));
+                  }
                 }
-              },
-              child: Text('Submit'),
+                Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text('Processing Data')));
+                _makePostRequest();
+              }
+            },
+            child: Text('Submit'),
+          ),
+          RaisedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => RegisterPage()),
+              );
+            },
+            child: const Text(
+              'Register',
             ),
           ),
         ],
@@ -326,11 +347,12 @@ class LaunchPage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Padding(
-                child: Image(
-                  image: NetworkImage('https://raw.githubusercontent.com/askvortsov1/HackPSU2019F/master/frontend/lib/I%20Help.png'),
-                ),
-          padding: const EdgeInsets.symmetric(vertical: 16.0)
+                  child: Image(
+                    image: NetworkImage('https://raw.githubusercontent.com/askvortsov1/HackPSU2019F/master/frontend/lib/I%20Help.png'),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 16.0)
               ),
+              const SizedBox(height: 20),
               RaisedButton(
                 onPressed: () {
                   Navigator.push(
@@ -357,7 +379,7 @@ class LaunchPage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               RaisedButton(
                 onPressed: () {
                   Navigator.push(
@@ -383,7 +405,7 @@ class LaunchPage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 70),
               RaisedButton(
                 onPressed: () {
                   Navigator.push(
@@ -404,7 +426,33 @@ class LaunchPage extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.all(10.0),
                   child: const Text(
-                      'Profile',
+                      'My Requests',
+                      style: TextStyle(fontSize: 20)
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Checkout()));
+                },
+                textColor: Colors.white,
+                padding: const EdgeInsets.all(0.0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: <Color>[
+                        Color(0xFF0D47A1),
+                        Color(0xFF1976D2),
+                        Color(0xFF42A5F5),
+                      ],
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(10.0),
+                  child: const Text(
+                      "Who I'm helping",
                       style: TextStyle(fontSize: 20)
                   ),
                 ),
@@ -464,99 +512,100 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
     return Form(
-      key: _formKey,
-      child: Container(
-        padding: EdgeInsets.all(8.0),
-        margin: new EdgeInsets.symmetric(horizontal: 16.0),
-        child: ListView(
-      children: <Widget>[
-      Padding(
-          child: Text('Level of Severity (1-10)', textAlign: TextAlign.center, textScaleFactor: 2),
-        padding: const EdgeInsets.symmetric(vertical: 16.0)
-    ),
-    TextFormField(
-    controller: severityController,
-    validator: (value) {
-    if (value.isEmpty) {
-    return 'Please enter  some text';
-    }
-    return null;
-    },
-    ),
-    Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8.0)
-    ),
-    Text('Reason for Severity', textAlign: TextAlign.center, textScaleFactor: 2),
-    TextFormField(
-    controller: severityDetailController,
-    validator: (value) {
-    if (value.isEmpty) {
-    return 'Please enter  some text';
-    }
-    return null;
-    },
-    ),
-    Padding(
-    padding: const EdgeInsets.symmetric(vertical: 16.0)
-    ),
-    Text('Item', textAlign: TextAlign.center, textScaleFactor: 2,),
-    TextFormField(
-    controller: itemController,
-    validator: (value) {
-    if (value.isEmpty) {
-    return 'Please enter some text';
-    }
-    return null;
-    },
-    ),
-    Text('Item Details', textAlign: TextAlign.center, textScaleFactor: 2,),
-    TextFormField(
-    controller: itemDetailController,
-    validator: (value) {
-    if (value.isEmpty) {
-    return 'Please enter some text';
-    }
-    return null;
-    },
-    ),
-    Padding(
-    padding: const EdgeInsets.symmetric(vertical: 16.0),
-    child: RaisedButton(
-    onPressed: () {
-    // Validate returns true if the form is valid, or false
-    // otherwise.
-    if (_formKey.currentState.validate()) {
-    _makePostRequest() async {
-    // set up POST request arguments
-    String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/login/';
-    Map<String, String> headers = {"Content-type": "application/json"};
-    String severity = severityController.text;
-    String item = itemController.text;
-    String severityDetail = severityDetailController.text;
-    String itemDetail = itemDetailController.text;
-    String json = '{"severity" : "$severity", "item" : "$item", "severityDetail" : "$severityDetail", "itemDetail" : "$itemDetail"}';
-    Response response = await post(url, headers: headers, body: json);
-    int statusCode = response.statusCode;
-    String body = response.body;
-    allRequests.add(NewRequest(severity, item, severityDetail, itemDetail, currentEmail));
-    print(allRequests);
-    print(body);
-    print(statusCode);
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => LaunchPage()));
-    }
-    Scaffold.of(context)
-        .showSnackBar(SnackBar(content: Text('Processing Data')));
-    _makePostRequest();
-    }
-    },
-    child: Text('Submit'),
-    ),
-    ),
-    ]
-    ),
-      )
+        key: _formKey,
+        child: Container(
+          padding: EdgeInsets.all(8.0),
+          margin: new EdgeInsets.symmetric(horizontal: 16.0),
+          child: ListView(
+              children: <Widget>[
+                Padding(
+                    child: Text('Level of Severity (1-10)', textAlign: TextAlign.left, textScaleFactor: 1.2),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0)
+                ),
+                TextFormField(
+                  keyboardType: TextInputType.number,
+                  controller: severityController,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter  some text';
+                    }
+                    return null;
+                  },
+                ),
+                Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0)
+                ),
+                Text('Reason for Severity', textAlign: TextAlign.left, textScaleFactor: 1.2),
+                TextFormField(
+                  controller: severityDetailController,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter  some text';
+                    }
+                    return null;
+                  },
+                ),
+                Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0)
+                ),
+                Text('Item', textAlign: TextAlign.left, textScaleFactor: 1.2),
+                TextFormField(
+                  controller: itemController,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+                Text('Item Details', textAlign: TextAlign.left, textScaleFactor: 1.2),
+                TextFormField(
+                  controller: itemDetailController,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter some text';
+                    }
+                    return null;
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  child: RaisedButton(
+                    onPressed: () {
+                      // Validate returns true if the form is valid, or false
+                      // otherwise.
+                      if (_formKey.currentState.validate()) {
+                        _makePostRequest() async {
+                          // set up POST request arguments
+                          String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/login/';
+                          Map<String, String> headers = {"Content-type": "application/json"};
+                          String severity = severityController.text;
+                          String item = itemController.text;
+                          String severityDetail = severityDetailController.text;
+                          String itemDetail = itemDetailController.text;
+                          String json = '{"severity" : "$severity", "item" : "$item", "severityDetail" : "$severityDetail", "itemDetail" : "$itemDetail"}';
+                          Response response = await post(url, headers: headers, body: json);
+                          int statusCode = response.statusCode;
+                          String body = response.body;
+                          allRequests.add(NewRequest(severity, item, severityDetail, itemDetail, currentEmail));
+                          print(allRequests);
+                          print(body);
+                          print(statusCode);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => LaunchPage()));
+                        }
+                        Scaffold.of(context)
+                            .showSnackBar(SnackBar(content: Text('Processing Data')));
+                        _makePostRequest();
+                      }
+                    },
+                    child: Text('Submit'),
+                  ),
+                ),
+              ]
+          ),
+        )
     );
   }
 }
@@ -616,62 +665,65 @@ class SendPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Send Help',
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text('Nearby Help Requests'),
-            ),
-            body: ListView(
-                children: <Widget>[
-                  Card(
-                    child: InkWell(
-                      onTap:(){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => RequestInfo()));
-                      },
-                      child: ListTile(
-                      title: Text('Severity 9'),
-                      subtitle: Text('Item: Shelter'),
-                      trailing: Text('7.0 mi'),
+      title: 'Send Help',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Nearby Help Requests'),
+        ),
+        body: ListView(
+            children: <Widget>[
+              Card(
+                child: InkWell(
+                  onTap:(){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RequestInfo()));
+                  },
+                  child: ListTile(
+                    title: Text('Severity 9'),
+                    subtitle: Text('Item: Shelter'),
+                    trailing: Text('7.0 mi'),
+                  ),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  title: Text('Severity 7'),
+                  subtitle: Text('Item: Food'),
+                  trailing: Text('13.4 mi'),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  title: Text('Severity 4'),
+                  subtitle: Text('Item: Water'),
+                  trailing: Text('14.1 mi'),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  title: Text('Severity 2'),
+                  subtitle: Text('Item: Clothing'),
+                  trailing: Text('18.6 mi'),
+                ),
+              ),
+              Container(
+                  color: Colors.grey[200],
+                  child: ListTile(
+                      title: Center(
+                        child: Text('Finish', style: TextStyle(fontWeight: FontWeight.bold)),
                       ),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Severity 7'),
-                      subtitle: Text('Item: Food'),
-                      trailing: Text('13.4 mi'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Severity 4'),
-                      subtitle: Text('Item: Water'),
-                      trailing: Text('14.1 mi'),
-                    ),
-                  ),
-                  Card(
-                    child: ListTile(
-                      title: Text('Severity 2'),
-                      subtitle: Text('Item: Clothing'),
-                      trailing: Text('18.6 mi'),
-                    ),
-                  ),
-                  Container(
-                      color: Colors.grey[200],
-                      child: ListTile(
-                          title: Center(
-                            child: Text('Finish', style: TextStyle(fontWeight: FontWeight.bold)),
-                          ),
-                          onTap: (){
-                            null;
-                          }
-                      )
-                  ),
-          ]
-            ),
-    ),
+                      onTap: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Checkout()),
+                        );
+                      }
+                  )
+              ),
+            ]
+        ),
+      ),
     );
   }
 }
@@ -696,79 +748,103 @@ class RequestInfo extends StatelessWidget {
           appBar: AppBar(
             title: Text('Help Request Info'),
           ),
-          body: ListView(
-            children: <Widget>[
-              ListTile(
-                  title: Text("Severity: 9"),
-                  subtitle: Text("\nREASON:\nHouse was destroyed in tornado, no place for family to live.\n"),
-              ),
-              ListTile(
-                  title: Text("Item: Shelter"),
-                  subtitle: Text("\nDETAILS:\nRoom for family of 4. Heating."),
-              ),
-              ListTile(
-                title: Text("7.0 miles away"),
-              ),
-              SizedBox(height: 100),
-              ButtonTheme.bar(
-                child: new ButtonBar(
-                  alignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    RaisedButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      textColor: Colors.white,
-                      padding: const EdgeInsets.all(0.0),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF0D47A1),
-                              Color(0xFF1976D2),
-                              Color(0xFF42A5F5),
-                            ],
+          body: Container(
+              child:ListView(
+                children: <Widget>[
+                  ListTile(
+                    title: Text("Severity: 9"),
+                    subtitle: Text("\nREASON:\nHouse was destroyed in tornado, no place for family to live.\n"),
+                  ),
+                  ListTile(
+                    title: Text("Item: Shelter"),
+                    subtitle: Text("\nDETAILS:\nRoom for family of 4. Heating."),
+                  ),
+                  ListTile(
+                    title: Text("7.0 miles away"),
+                  ),
+                  SizedBox(height: 50),
+                  ButtonTheme.bar(
+                    child: new ButtonBar(
+                      alignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        RaisedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          textColor: Colors.white,
+                          padding: const EdgeInsets.all(0.0),
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: <Color>[
+                                  Color(0xFF0D47A1),
+                                  Color(0xFF1976D2),
+                                  Color(0xFF42A5F5),
+                                ],
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(10.0),
+                            child: const Text(
+                                'Back',
+                                style: TextStyle(fontSize: 20)
+                            ),
                           ),
                         ),
-                        padding: const EdgeInsets.all(10.0),
-                        child: const Text(
-                            'Back',
-                            style: TextStyle(fontSize: 20)
-                        ),
-                      ),
-                    ),
-                    RaisedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SendPage()));
-                      },
-                      textColor: Colors.white,
-                      padding: const EdgeInsets.all(0.0),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: <Color>[
-                              Color(0xFF0D47A1),
-                              Color(0xFF1976D2),
-                              Color(0xFF42A5F5),
-                            ],
+                        RaisedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => SendPage()));
+                          },
+                          textColor: Colors.white,
+                          padding: const EdgeInsets.all(0.0),
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: <Color>[
+                                  Color(0xFF0D47A1),
+                                  Color(0xFF1976D2),
+                                  Color(0xFF42A5F5),
+                                ],
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(10.0),
+                            child: const Text(
+                                'Add',
+                                style: TextStyle(fontSize: 20)
+                            ),
                           ),
                         ),
-                        padding: const EdgeInsets.all(10.0),
-                        child: const Text(
-                            'Add',
-                            style: TextStyle(fontSize: 20)
+                      ],
+                    ),
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                    },
+                    textColor: Colors.white,
+                    padding: const EdgeInsets.all(0.0),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            Color(0xFF0D47A1),
+                            Color(0xFF1976D2),
+                            Color(0xFF42A5F5),
+                          ],
                         ),
                       ),
+                      padding: const EdgeInsets.all(10.0),
+                      child: const Text(
+                          'Open in Maps',
+                          style: TextStyle(fontSize: 20)
+                      ),
                     ),
-                  ],
-                ),
-              ),
+                  ),
 
-
-            ],
+                ],
+              )
           )
+
       ),
     );
   }
@@ -800,4 +876,114 @@ class MyInfo extends StatelessWidget {
     );
   }
 }
+
+class Checkout extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Who I'm helping",
+      home: Scaffold(
+          appBar: AppBar(
+            title: Text("Who I'm Helping"),
+          ),
+          body: ListView(
+            children: <Widget>[
+              Card(
+                child: InkWell(
+                  onTap:(){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Finalize()));
+                  },
+                  child: ListTile(
+                    title: Text('Severity 9'),
+                    subtitle: Text('Item: Shelter'),
+                    trailing: Icon(Icons.more_vert),
+                  ),
+                ),
+              ),
+              SizedBox(height: 300),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LaunchPage()),
+                  );
+                },
+                textColor: Colors.white,
+                padding: const EdgeInsets.all(0.0),
+
+                child: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: <Color>[
+                        Color(0xFF0D47A1),
+                        Color(0xFF1976D2),
+                        Color(0xFF42A5F5),
+                      ],
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(10.0),
+                  child: const Text(
+                      'Go Home',
+                      style: TextStyle(fontSize: 20)
+                  ),
+                ),
+              ),
+            ],
+          )
+      ),
+    );
+  }
+}
+
+class Finalize extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Finalize Info',
+      home: Scaffold(
+          appBar: AppBar(
+            title: Text('Finalize Info'),
+          ),
+          body: ListView(
+            children: <Widget>[
+              ListTile(
+                title: Text("Severity: 9"),
+                subtitle: Text("\nREASON:\nHouse was destroyed in tornado, no place for family to live.\n"),
+              ),
+              ListTile(
+                title: Text("Item: Shelter"),
+                subtitle: Text("\nDETAILS:\nRoom for family of 4. Heating."),
+              ),
+              SizedBox(height: 100),
+              RaisedButton(
+                onPressed: () {
+                },
+                textColor: Colors.white,
+                padding: const EdgeInsets.all(0.0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: <Color>[
+                        Color(0xFF0D47A1),
+                        Color(0xFF1976D2),
+                        Color(0xFF42A5F5),
+                      ],
+                    ),
+                  ),
+                  padding: const EdgeInsets.all(10.0),
+                  child: const Text(
+                      'Open in Maps',
+                      style: TextStyle(fontSize: 20)
+                  ),
+                ),
+              )
+            ],
+          )
+      ),
+    );
+  }
+}
+
 

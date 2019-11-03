@@ -6,20 +6,31 @@ from django.utils import timezone
 class HelpRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    item = models.CharField(max_length=100)
+    CHOICES = (
+        ("s", "Shelter"),
+        ("f", "Food"),
+        ("w", "Water"),
+        ("t", "Toiletries"),
+        ("c", "Clothes")
+    )
+
+    item = models.CharField(max_length=1, choices=CHOICES)
 
     item_description = models.TextField()
 
     datetime = models.DateTimeField(default=timezone.now)
 
-    SEVERITIES = (
-        (5, "Extremely Severe"),
-        (4, "Very Severe"),
-        (3, "Moderately Severe"),
-        (2, "Somewhat Severe"),
-        (1, "Not Severe")
-    )
-
-    severity = models.IntegerField(choices=SEVERITIES)
+    severity = models.IntegerField()
 
     severity_detail = models.TextField()
+
+
+
+class AskerReview(models.Model):
+    rating = models.FloatField()
+
+    datetime = models.DateTimeField(default=timezone.now)
+
+    reviewer = models.ForeignKey(User, on_delete=models.PROTECT)
+
+    flag = models.BooleanField(default=False)
