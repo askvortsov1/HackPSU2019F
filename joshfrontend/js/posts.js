@@ -1,15 +1,16 @@
 function storeUserData(dataKey,email) {
+
+    sessionStorage.setItem("userid",7);
     
     $.ajax({
-        type: "POST",
-        url: "http://hackpsu-fall2019.herokuapp.com/rest-auth/user/",
-        headers: {
-            Authorization: "Token " + dataKey
-        },
+        type: "GET",
+        url: "http://hackpsu-fall2019.herokuapp.com/emailidconverter/",
+        data: {"email": email},
+        dataType: "json",
         success: function (data) {
             console.log("Got data successfully");
             console.log(data);
-            window.localStorage.setItem("curr_user", data);
+            sessionStorage.setItem("user",data);
         },
         error: function () {
             console.log("Failed to get data");
@@ -94,7 +95,7 @@ function submitRequest() {
 
     var requestData =
         {
-            user: window.localStorage["curr_user"]["id"],
+            user: sessionStorage.getItem("userid"),
             item: document.getElementById('requestItem').value,
             item_description: document.getElementById('requestDetails').value,
             severity: document.getElementById('requestUrgency').value,
@@ -103,7 +104,7 @@ function submitRequest() {
 
     $.ajax({
         type: "POST",
-        url: "http://hackpsu-fall2019.herokuapp.com/rest-auth/help/requests/",
+        url: "http://hackpsu-fall2019.herokuapp.com/help/requests/create",
         dataType: "json",
         data: requestData,
         success: function (data) {
@@ -149,7 +150,7 @@ function getRequests(){
 
 function getMyItems(){
 
-    for(i = 0; i < sessionStorage.getItem("numTasks"); i += 1){
+    for(i = 0; i < parseInt(sessionStorage.getItem("numTasks")); i += 1){
         viewBody = document.getElementById("viewBody");
         viewBody.innerHTML += "<div class='cardForm'><p>" + sessionStorage.getItem("taskItem"+i) + "</p><p>" 
                                         + sessionStorage.getItem("taskDesc"+i) + "</p><p>"  
@@ -165,7 +166,7 @@ function claimTask(index){
     sessionStorage.setItem("taskDesc"+saveIndex,document.getElementById("item_description"+index).value);
     sessionStorage.setItem("taskSev"+saveIndex,document.getElementById("severity"+index).value);
     sessionStorage.setItem("taskDet"+saveIndex,document.getElementById("severity_detail"+index).value);
-    sessionStorage.setItem("numTasks",sessionStorage.getItem("numTasks") + 1);
+    sessionStorage.setItem("numTasks",parseInt(sessionStorage.getItem("numTasks")) + 1);
 }
 
 function logout(){
