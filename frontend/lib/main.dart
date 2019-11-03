@@ -131,7 +131,7 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
             controller: firstNameController,
             validator: (value) {
               if (value.isEmpty) {
-                return 'Unicorn';
+                return 'Male_Female';
               }
               return null;
             },
@@ -177,10 +177,6 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
                       .showSnackBar(SnackBar(content: Text('Processing Data')));
                   _makePostRequest();
                 }
-
-
-
-
               },
               child: Text('Submit'),
             ),
@@ -561,15 +557,40 @@ class ProfilePage extends StatelessWidget {
           title: Text('Profile'),
         ),
         body: ListView(
-          children: <Widget>[
-            ListTile(
-              title: Text("Request 1")
-            ),
-            ListTile(
-                title: Text("Request 2")
-            ),
-          ],
-        )
+            children: <Widget>[
+              ListTile(
+                title: Text("Current Requests"),
+              ),
+              Card(
+                child: InkWell(
+                  onTap:(){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MyInfo()));
+                  },
+                  child: ListTile(
+                    title: Text('Severity 9'),
+                    subtitle: Text('Item: Shelter'),
+                    trailing: Icon(Icons.more_vert),
+                  ),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  title: Text('Severity 4'),
+                  subtitle: Text('Item: Clothing'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  title: Text('Severity 3'),
+                  subtitle: Text('Item: Clothing'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+            ]
+        ),
       ),
     );
   }
@@ -584,31 +605,59 @@ class SendPage extends StatelessWidget {
         title: 'Send Help',
         home: Scaffold(
             appBar: AppBar(
-              title: Text('Some Requests'),
+              title: Text('Nearby Help Requests'),
             ),
-            body: new ListView.builder
-              (
-                itemCount: allRequests.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return new ListView(
-                    children: <Widget>[
-                      Container(
-                        child: const Center(child: Text('Severity')),
+            body: ListView(
+                children: <Widget>[
+                  Card(
+                    child: InkWell(
+                      onTap:(){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => RequestInfo()));
+                      },
+                      child: ListTile(
+                      title: Text('Severity 9'),
+                      subtitle: Text('Item: Shelter'),
+                      trailing: Text('7.0 mi'),
                       ),
-                      Container(
-                        child: const Center(child: Text('Severity Details')),
-                      ),
-                      Container(
-                        child: const Center(child: Text('Item')),
-                      ),
-                      Container(
-                        child: const Center(child: Text('Item Details')),
-                      ),
-                    ],
-                  );
-                }
-            )
-        )
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      title: Text('Severity 7'),
+                      subtitle: Text('Item: Food'),
+                      trailing: Text('13.4 mi'),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      title: Text('Severity 4'),
+                      subtitle: Text('Item: Water'),
+                      trailing: Text('14.1 mi'),
+                    ),
+                  ),
+                  Card(
+                    child: ListTile(
+                      title: Text('Severity 2'),
+                      subtitle: Text('Item: Clothing'),
+                      trailing: Text('18.6 mi'),
+                    ),
+                  ),
+                  Container(
+                      color: Colors.grey[200],
+                      child: ListTile(
+                          title: Center(
+                            child: Text('Finish', style: TextStyle(fontWeight: FontWeight.bold)),
+                          ),
+                          onTap: (){
+                            null;
+                          }
+                      )
+                  ),
+          ]
+            ),
+    ),
     );
   }
 }
@@ -623,3 +672,118 @@ class NewRequest{
     this.userEmail = userEmail;
   }
 }
+
+class RequestInfo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Request Info',
+      home: Scaffold(
+          appBar: AppBar(
+            title: Text('Help Request Info'),
+          ),
+          body: ListView(
+            children: <Widget>[
+              ListTile(
+                  title: Text("Severity: 9"),
+                  subtitle: Text("\nREASON:\nHouse was destroyed in tornado, no place for family to live.\n"),
+              ),
+              ListTile(
+                  title: Text("Item: Shelter"),
+                  subtitle: Text("\nDETAILS:\nRoom for family of 4. Heating."),
+              ),
+              ListTile(
+                title: Text("7.0 miles away"),
+              ),
+              SizedBox(height: 100),
+              ButtonTheme.bar(
+                child: new ButtonBar(
+                  alignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RaisedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      textColor: Colors.white,
+                      padding: const EdgeInsets.all(0.0),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF0D47A1),
+                              Color(0xFF1976D2),
+                              Color(0xFF42A5F5),
+                            ],
+                          ),
+                        ),
+                        padding: const EdgeInsets.all(10.0),
+                        child: const Text(
+                            'Back',
+                            style: TextStyle(fontSize: 20)
+                        ),
+                      ),
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SendPage()));
+                      },
+                      textColor: Colors.white,
+                      padding: const EdgeInsets.all(0.0),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF0D47A1),
+                              Color(0xFF1976D2),
+                              Color(0xFF42A5F5),
+                            ],
+                          ),
+                        ),
+                        padding: const EdgeInsets.all(10.0),
+                        child: const Text(
+                            'Add',
+                            style: TextStyle(fontSize: 20)
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+
+            ],
+          )
+      ),
+    );
+  }
+}
+
+class MyInfo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Request Info',
+      home: Scaffold(
+          appBar: AppBar(
+            title: Text('Help Request Info'),
+          ),
+          body: ListView(
+            children: <Widget>[
+              ListTile(
+                title: Text("Severity: 9"),
+                subtitle: Text("\nREASON:\nHouse was destroyed in tornado, no place for family to live.\n"),
+              ),
+              ListTile(
+                title: Text("Item: Shelter"),
+                subtitle: Text("\nDETAILS:\nRoom for family of 4. Heating."),
+              ),
+              SizedBox(height: 100),
+            ],
+          )
+      ),
+    );
+  }
+}
+
