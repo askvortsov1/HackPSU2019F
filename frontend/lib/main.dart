@@ -511,92 +511,106 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
   }
 }
 
-class RequestDetails extends StatelessWidget {
+class RequestDetails extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'I Need Help',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('I Neep Help'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              RaisedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => PrimaryRequest()),
-                  );
-                },
-                textColor: Colors.white,
-                padding: const EdgeInsets.all(0.0),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF0D47A1),
-                        Color(0xFF1976D2),
-                        Color(0xFF42A5F5),
-                      ],
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(10.0),
-                  child: const Text(
-                      'Request',
-                      style: TextStyle(fontSize: 20)
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              RaisedButton(
-                onPressed: () {},
-                textColor: Colors.white,
-                padding: const EdgeInsets.all(0.0),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF0D47A1),
-                        Color(0xFF1976D2),
-                        Color(0xFF42A5F5),
-                      ],
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(10.0),
-                  child: const Text(
-                      'Send',
-                      style: TextStyle(fontSize: 20)
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              RaisedButton(
-                onPressed: () {},
-                textColor: Colors.white,
-                padding: const EdgeInsets.all(0.0),
-                child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        Color(0xFF0D47A1),
-                        Color(0xFF1976D2),
-                        Color(0xFF42A5F5),
-                      ],
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(10.0),
-                  child: const Text(
-                      'Profile',
-                      style: TextStyle(fontSize: 20)
-                  ),
-                ),
-              ),
-            ],
+        title: 'Request Details',
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text('Request Details'),
           ),
-        ),
+          body: MyCustomFormRequestDetails(),
+        )
+    );
+  }
+}
+class MyCustomFormRequestDetails extends StatefulWidget {
+  @override
+  MyCustomFormStateRequestDetails createState() {
+    return MyCustomFormStateRequestDetails();
+  }
+}
+class MyCustomFormStateRequestDetails extends State<MyCustomFormRequestDetails> {
+  // Create a global key that uniquely identifies the Form widget
+  // and allows validation of the form.
+  //
+  // Note: This is a GlobalKey<FormState>,
+  // not a GlobalKey<MyCustomFormState>.
+  final _formKey = GlobalKey<FormState>();
+  final severityDetailController = TextEditingController();
+  final itemDetailController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    severityDetailController.dispose();
+    itemDetailController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Build a Form widget using the _formKey created above.
+    return Form(
+      key: _formKey,
+      child: ListView(
+        children: <Widget>[
+          Text('Reason for Severity', textAlign: TextAlign.center, textScaleFactor: 2),
+          TextFormField(
+            controller: severityDetailController,
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter  some text';
+              }
+              return null;
+            },
+          ),
+          Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0)
+          ),
+          Text('Item Details', textAlign: TextAlign.center, textScaleFactor: 2,),
+          TextFormField(
+            controller: itemDetailController,
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: RaisedButton(
+              onPressed: () {
+                // Validate returns true if the form is valid, or false
+                // otherwise.
+                if (_formKey.currentState.validate()) {
+                  _makePostRequest() async {
+                    // set up POST request arguments
+                    String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/login/';
+                    Map<String, String> headers = {"Content-type": "application/json"};
+                    String severityDetail = severityDetailController.text;
+                    String itemDetail = itemDetailController.text;
+                    String json = '{"severityDetail": "$severityDetail", "itemDetail": "$itemDetail"}';
+                    Response response = await post(url, headers: headers, body: json);
+                    int statusCode = response.statusCode;
+                    String body = response.body;
+                    print(body);
+                    print(statusCode);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LaunchPage()));
+                  }
+                  Scaffold.of(context)
+                      .showSnackBar(SnackBar(content: Text('Processing Data')));
+                  _makePostRequest();
+                }
+              },
+              child: Text('Submit'),
+            ),
+          ),
+        ],
       ),
     );
   }

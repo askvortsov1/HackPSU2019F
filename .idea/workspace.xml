@@ -23,8 +23,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+            <state relative-caret-position="68">
+              <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
                 <element signature="e#207#464#0" />
@@ -36,7 +36,10 @@
                 <element signature="e#210#3123#0" />
                 <element signature="e#13036#13293#0" />
                 <element signature="e#13336#13423#0" />
-                <element signature="e#17294#20212#0" />
+                <element signature="e#13580#17041#0" />
+                <element signature="e#17050#17333#0" />
+                <element signature="e#17390#17505#0" />
+                <element signature="e#17586#21005#0" />
               </folding>
             </state>
           </provider>
@@ -65,6 +68,7 @@
       <find>primary</find>
       <find>customformstate</find>
       <find>extends state</find>
+      <find>Level of Sev</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -109,12 +113,6 @@
               <item name="HackPSU2019F" type="b2602c69:ProjectViewProjectNode" />
               <item name="HackPSU2019F" type="462c0819:PsiDirectoryNode" />
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="HackPSU2019F" type="b2602c69:ProjectViewProjectNode" />
-              <item name="HackPSU2019F" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -182,7 +180,7 @@
     <frame x="-6" y="-6" width="1292" height="692" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" visible="true" weight="0.32928804" />
+      <window_info active="true" content_ui="combo" id="Project" visible="true" weight="0.32928804" />
       <window_info id="Structure" side_tool="true" />
       <window_info id="Image Layers" />
       <window_info id="Designer" />
@@ -190,7 +188,7 @@
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Captures" order="0" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Dart Analysis" visible="true" weight="0.32978722" />
+      <window_info anchor="bottom" id="Dart Analysis" visible="true" weight="0.32978722" />
       <window_info anchor="bottom" id="Version Control" weight="0.32978722" />
       <window_info anchor="bottom" id="TODO" weight="0.32978722" />
       <window_info anchor="bottom" id="Run" weight="0.32978722" />
@@ -235,8 +233,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+        <state relative-caret-position="68">
+          <caret line="188" lean-forward="true" selection-start-line="188" selection-end-line="188" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
             <element signature="e#207#464#0" />
@@ -248,7 +246,10 @@
             <element signature="e#210#3123#0" />
             <element signature="e#13036#13293#0" />
             <element signature="e#13336#13423#0" />
-            <element signature="e#17294#20212#0" />
+            <element signature="e#13580#17041#0" />
+            <element signature="e#17050#17333#0" />
+            <element signature="e#17390#17505#0" />
+            <element signature="e#17586#21005#0" />
           </folding>
         </state>
       </provider>
