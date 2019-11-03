@@ -3,4 +3,4 @@
 *.pytest_cache
 **/static/*
 
-*.sqlite3
+**.sqlite3
