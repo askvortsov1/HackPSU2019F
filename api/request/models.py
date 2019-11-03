@@ -6,7 +6,15 @@ from django.utils import timezone
 class HelpRequest(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    item = models.CharField(max_length=100)
+    CHOICES = (
+        ("s", "Shelter"),
+        ("f", "Food"),
+        ("w", "Water"),
+        ("t", "Toiletries"),
+        ("c", "Clothes")
+    )
+
+    item = models.CharField(max_length=1, choices=CHOICES)
 
     item_description = models.TextField()
 
@@ -15,3 +23,15 @@ class HelpRequest(models.Model):
     severity = models.IntegerField()
 
     severity_detail = models.TextField()
+
+    lon = 
+
+
+class AskerReview(models.Model):
+    rating = models.FloatField()
+
+    datetime = models.DateTimeField(default=timezone.now)
+
+    reviewer = models.ForeignKey(User, on_delete=models.PROTECT)
+
+    flag = models.BooleanField(default=False)
