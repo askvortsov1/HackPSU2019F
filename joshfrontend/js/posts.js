@@ -1,4 +1,4 @@
-function storeUserData(dataKey) {
+function storeUserData(dataKey,email) {
     
     $.ajax({
         type: "POST",
@@ -31,7 +31,8 @@ function submitLogin() {
             if(data){
                 console.log("Got token " + data["key"]);
                 document.cookie = "key:" + data["key"];
-                storeUserData(data["key"]);
+                sessionStorage.setItem("numTasks",0);
+                storeUserData(data["key"], document.getElementById('loginFormEmail').value);
                 document.location.href = document.location.href.replace('index.html', '') + "pages/main.html";
             }
             else{
@@ -133,17 +134,38 @@ function getRequests(){
                                         data[i]["item_description"] + "</p><p>" + 
                                         data[i]["severity"] + "</p><p>" + 
                                         data[i]["severity_detail"] + "</p><form><input type='hidden' id='claimID' value='" + 
-                                        data[i]["id"] + "'><input type='hidden' id='item' value='" + 
-                                        data[i]["item"] + "'><input type='hidden' id='item_description' value='" + 
-                                        data[i]["item_description"] + "'><input type='hidden' id='severity' value='" + 
-                                        data[i]["severity"] + "'><input type='hidden' id='severity_detail' value='" + 
-                                        data[i]["severity_detail"] + "'><input type='submit' value='Claim' class='formcontrol btn btn-primary'></form></div>";
+                                        data[i]["id"] + "'><input type='hidden' id='item" + i + "' value='" + 
+                                        data[i]["item"] + "'><input type='hidden' id='item_description" + i + "' value='" + 
+                                        data[i]["item_description"] + "'><input type='hidden' id='severity" + i + "' value='" + 
+                                        data[i]["severity"] + "'><input type='hidden' id='severity_detail" + i + "' value='" + 
+                                        data[i]["severity_detail"] + "'><input type='submit' value='Claim' class='formcontrol btn btn-primary' onclick='claimTask(" + i + ")'></form></div>";
             }
         },
         error: function (e) {
             alert('Error' + e);
         }
     });
+}
+
+function getMyItems(){
+
+    for(i = 0; i < sessionStorage.getItem("numTasks"); i += 1){
+        viewBody = document.getElementById("viewBody");
+        viewBody.innerHTML += "<div class='cardForm'><p>" + sessionStorage.getItem("taskItem"+i) + "</p><p>" 
+                                        + sessionStorage.getItem("taskDesc"+i) + "</p><p>"  
+                                        + sessionStorage.getItem("taskSev"+i) + "</p><p>"  
+                                        + sessionStorage.getItem("taskDet"+i) + "</p></div>";
+    }
+
+}
+
+function claimTask(index){
+    saveIndex = sessionStorage.getItem("numTasks");
+    sessionStorage.setItem("taskItem"+saveIndex,document.getElementById("item"+index).value);
+    sessionStorage.setItem("taskDesc"+saveIndex,document.getElementById("item_description"+index).value);
+    sessionStorage.setItem("taskSev"+saveIndex,document.getElementById("severity"+index).value);
+    sessionStorage.setItem("taskDet"+saveIndex,document.getElementById("severity_detail"+index).value);
+    sessionStorage.setItem("numTasks",sessionStorage.getItem("numTasks") + 1);
 }
 
 function logout(){
