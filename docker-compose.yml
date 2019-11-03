@@ -6,12 +6,12 @@ services:
     env_file:
     - ./.env
   api:
-    build: .
+    build: ./api
     container_name: api
     env_file:
     - ./.env
     volumes:
-      - ./src:/code
+      - ./api/src:/code
     command: /gunicorn.sh
     depends_on:
       - db
