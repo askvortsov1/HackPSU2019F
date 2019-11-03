@@ -26,7 +26,13 @@ class HelpRequestCreate(generics.CreateAPIView):
     queryset = HelpRequest.objects.all()
     serializer_class = HelpRequestSerializer
 
+    def __init__(self, request, *args, **kwargs):
+        return super().__init__()
+
 
 class HelpRequestDestroy(generics.DestroyAPIView):
     queryset = HelpRequest.objects.all()
     serializer_class = HelpRequestSerializer
+
+    def __init__(self, request, *args, **kwargs):
+        return super().__init__()
