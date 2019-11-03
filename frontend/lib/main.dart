@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 void main() {
   runApp(MaterialApp(
     title: 'I Need Help',
-    home: PrimaryRequest(),
+    home: LaunchPage(),
   ));
 }
 
@@ -187,7 +187,6 @@ class MyCustomFormStateRegister extends State<MyCustomFormRegister> {
   }
 }
 
-
 class LoginPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -311,10 +310,10 @@ class LaunchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'I Need Help',
+      title: 'Give and Get Help',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('I Neep Help'),
+          title: Text('Give and Get Help'),
         ),
         body: Center(
           child: Column(
@@ -341,14 +340,18 @@ class LaunchPage extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.all(10.0),
                   child: const Text(
-                      'Request',
+                      'Request Help',
                       style: TextStyle(fontSize: 20)
                   ),
                 ),
               ),
               const SizedBox(height: 30),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SendPage()));
+                },
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(0.0),
                 child: Container(
@@ -363,14 +366,18 @@ class LaunchPage extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.all(10.0),
                   child: const Text(
-                      'Send',
+                      'Send Help',
                       style: TextStyle(fontSize: 20)
                   ),
                 ),
               ),
               const SizedBox(height: 30),
               RaisedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()));
+                },
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(0.0),
                 child: Container(
@@ -612,6 +619,26 @@ class MyCustomFormStateRequestDetails extends State<MyCustomFormRequestDetails> 
           ),
         ],
       ),
+    );
+  }
+}
+
+class ProfilePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Profile',
+        home: Text("Profile"),
+    );
+  }
+}
+
+class SendPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Send Help',
+        home: Text("Send some help"),
     );
   }
 }
