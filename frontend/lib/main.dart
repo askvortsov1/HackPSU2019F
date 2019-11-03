@@ -2,6 +2,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
+import 'dart:async';
+import 'package:http/http.dart' as http;
+
+const baseUrl = "http://hackpsu-fall2019.herokuapp.com/help/requests/?format=json";
+
+class API {
+  static Future getRequest() {
+    var url = baseUrl;
+    return http.get(url);
+  }
+}
+
 String currentEmail;
 List<NewRequest> allRequests = [];
 
@@ -275,7 +287,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 if (_formKey.currentState.validate()) {
                   _makePostRequest() async {
                     // set up POST request arguments
-                    String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/login/';
+                    String url = 'http://hackpsu-fall2019.herokuapp.com/help/requests/?format=json';
                     Map<String, String> headers = {"Content-type": "application/json"};
                     String email = emailController.text;
                     String password = passwordController.text;
@@ -528,7 +540,7 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
     if (_formKey.currentState.validate()) {
     _makePostRequest() async {
     // set up POST request arguments
-    String url = 'https://hackpsu-fall2019.herokuapp.com/rest-auth/login/';
+    String url = 'http://hackpsu-fall2019.herokuapp.com/help/requests/?format=json';
     Map<String, String> headers = {"Content-type": "application/json"};
     String severity = severityController.text;
     String item = itemController.text;
@@ -542,6 +554,7 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
     print(allRequests);
     print(body);
     print(statusCode);
+
     Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => LaunchPage()));
@@ -676,17 +689,6 @@ class SendPage extends StatelessWidget {
   }
 }
 
-class NewRequest{
-  String severity, item, severityDetail, itemDetail, userEmail;
-  NewRequest(String severity, item, severityDetail, itemDetail, userEmail){
-    this.severity = severity;
-    this.item = item;
-    this.severityDetail = severity;
-    this.itemDetail = itemDetail;
-    this.userEmail = userEmail;
-  }
-}
-
 class RequestInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -699,12 +701,12 @@ class RequestInfo extends StatelessWidget {
           body: ListView(
             children: <Widget>[
               ListTile(
-                  title: Text("Severity: 9"),
-                  subtitle: Text("\nREASON:\nHouse was destroyed in tornado, no place for family to live.\n"),
+                title: Text("Severity: 9"),
+                subtitle: Text("\nREASON:\nHouse was destroyed in tornado, no place for family to live.\n"),
               ),
               ListTile(
-                  title: Text("Item: Shelter"),
-                  subtitle: Text("\nDETAILS:\nRoom for family of 4. Heating."),
+                title: Text("Item: Shelter"),
+                subtitle: Text("\nDETAILS:\nRoom for family of 4. Heating."),
               ),
               ListTile(
                 title: Text("7.0 miles away"),
@@ -798,6 +800,30 @@ class MyInfo extends StatelessWidget {
           )
       ),
     );
+  }
+}
+
+
+
+class NewRequest{
+  String severity, item, severityDetail, itemDetail, userEmail;
+  NewRequest(String severity, item, severityDetail, itemDetail, userEmail){
+    this.severity = severity;
+    this.item = item;
+    this.severityDetail = severity;
+    this.itemDetail = itemDetail;
+    this.userEmail = userEmail;
+  }
+
+  NewRequest.fromJson(Map json)
+    :severity = json['severity'],
+    item = json['item'],
+    severityDetail = json['severityDetail'],
+    itemDetail = json['itemDetail'];
+
+  Map tojson() {
+    return {'severity' : severity, 'item' : item, 'severityDetail' : severityDetail, 'itemDetail' : itemDetail};
+
   }
 }
 
