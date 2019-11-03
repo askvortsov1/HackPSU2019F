@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <title>I Need Help</title>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="row">
+        <div class="col-12">
+          <center><h1>I Need Help</h1></center>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <div class="col-12">
+          <center>
+            <button type="button" class="btn btn-big" data-toggle="modal" data-target="#requestModal">
+              Request<br>
+              <small>Ask for Help</small>
+            </button>
+          </center>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <div class="col-12">
+          <center>
+            <button type="button" class="btn btn-big" data-toggle="modal" data-target="#sendModal">
+              Send<br>
+              <small>Find others in need</small>
+            </button>
+          </center>
+        </div>
+      </div>
+
+      <br>
+
+      <b id="requestFail" style="display:none;">Failed to create request!</b>
+
+      <!-- Request Help Modal -->
+      <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Request Help</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form onsubmit="return false;">
+                <div class="form-group">
+                  <label for="requestUrgency">Severity</label>
+                  <select id="requestUrgency" class="form-control">
+                    <option value="1">1 (Not Very)</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5 (Moderate)</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10 (Very)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                    <label for="requestSeverity">Explain the Severity</label>
+                    <textarea rows="2" cols="50" class="form-control" id="requestSeverity"></textarea>
+                  </div>
+                <div class="form-group">
+                  <label for="requestItem">Required Items</label>
+                  <select id="requestItem" class="form-control">
+                    <option value="f">Food</option>
+                    <option value="w">Water</option>
+                    <option value="s">Shelter</option>
+                    <option value="c">Clothes</option>
+                    <option value="t">Toiletries</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="requestDetails">Details</label>
+                  <textarea rows="4" cols="50" class="form-control" id="requestDetails"></textarea>
+                </div>
+                <div class="form-group">
+                  <input type="submit" class="form-control" id="requestSubmit" value="Request" onclick="submitRequest()">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Scripts, jquery, popper, ajax -->
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="../js/posts.js"></script>
+  </body>
+
+</html>

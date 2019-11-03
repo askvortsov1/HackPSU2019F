@@ -4,7 +4,7 @@ from django.urls import path
 
 
 router = DefaultRouter()
-router.register(r'requests', HelpRequestViewSet, basename='user')
+router.register(r'requests', HelpResponseViewSet, basename='user')
 urlpatterns = router.urls
 urlpatterns += [
     path('requests/create/', HelpRequestCreate),
