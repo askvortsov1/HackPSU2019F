@@ -129,7 +129,15 @@ function getRequests(){
         success: function (data) {
             for(i = 0; i < data.length; i ++){
                 helpBody = document.getElementById("helpBody");
-                helpBody.innerHTML += "<div class='cardForm'><p>" + data[i]["item"] + "</p><p>" + data[i]["item_description"] + "</p><p>" + data[i]["severity"] + "</p><p>" + data[i]["severity_detail"] + "</p><form><input type='submit' value='Claim' class='formcontrol btn btn-primary'></form></div>";
+                helpBody.innerHTML += "<div class='cardForm'><p>" + data[i]["item"] + "</p><p>" + 
+                                        data[i]["item_description"] + "</p><p>" + 
+                                        data[i]["severity"] + "</p><p>" + 
+                                        data[i]["severity_detail"] + "</p><form><input type='hidden' id='claimID' value='" + 
+                                        data[i]["id"] + "'><input type='hidden' id='item' value='" + 
+                                        data[i]["item"] + "'><input type='hidden' id='item_description' value='" + 
+                                        data[i]["item_description"] + "'><input type='hidden' id='severity' value='" + 
+                                        data[i]["severity"] + "'><input type='hidden' id='severity_detail' value='" + 
+                                        data[i]["severity_detail"] + "'><input type='submit' value='Claim' class='formcontrol btn btn-primary'></form></div>";
             }
         },
         error: function (e) {
