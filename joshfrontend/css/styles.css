@@ -12,3 +12,9 @@
 .btn-big:hover{
     background-color:#eeeeee;
 }
+
+.cardForm{
+    border:2px solid #eeeeee;
+    margin:2rem;
+    padding:2rem;
+}

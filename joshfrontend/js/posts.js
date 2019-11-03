@@ -129,12 +129,7 @@ function getRequests(){
         success: function (data) {
             for(i = 0; i < data.length; i ++){
                 helpBody = document.getElementById("helpBody");
-                helpBody.innerHTML += "<form>";
-                helpBody.innerHTML += "<p>" + data[i]["item"] + "</p>";
-                helpBody.innerHTML += "<p>" + data[i]["item_description"] + "</p>";
-                helpBody.innerHTML += "<p>" + data[i]["severity"] + "</p>";
-                helpBody.innerHTML += "<p>" + data[i]["severity_detail"] + "</p>";
-                helpBody.innerHTML += "</form>";
+                helpBody.innerHTML += "<div class='cardForm'><p>" + data[i]["item"] + "</p><p>" + data[i]["item_description"] + "</p><p>" + data[i]["severity"] + "</p><p>" + data[i]["severity_detail"] + "</p><form><input type='submit' value='Claim' class='formcontrol btn btn-primary'></form></div>";
             }
         },
         error: function (e) {
