@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'rest_auth.registration',
-    'accounts.apps.AccountsConfig'
+    'accounts.apps.AccountsConfig',
+    'request.apps.RequestConfig'
 ]
 
 MIDDLEWARE = [

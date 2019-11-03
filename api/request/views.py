@@ -1,3 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+from rest_framework import viewsets
+from rest_framework.response import Response
+from .models import HelpRequest
+from .serializers import HelpRequestSerializer
 
-# Create your views here.
+
+class HelpRequestViewSet(viewsets.ViewSet):
+    """
+    A simple ViewSet for listing or retrieving help requests.
+    """
+
+    def list(self, request):
+        queryset = HelpRequest.objects.all()
+        serializer = HelpRequestSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None):
+        queryset = HelpRequest.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = HelpRequestSerializer(user)
+        return Response(serializer.data)
