@@ -22,10 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 's39u#0-dyk)smta&&cvez_wuko#2k(*9ruvxnajm1%rc-0gj)q'
+SECRET_KEY = os.getenv("SECRET_KEY", 's39u#0-dyk)smta&&cvez_wuko#2k(*9ruvxnajm1%rc-0gj)q')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("ENV") == "PROD"
 
 ALLOWED_HOSTS = ['hackpsu-fall2019.herokuapp.com', 'localhost']
 
@@ -35,6 +35,7 @@ SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     'corsheaders',
+    'rest_framework_swagger',
     'accounts.apps.AccountsConfig',
     'request.apps.RequestConfig'
 ]

@@ -81,8 +81,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     # Age
     birthday = models.DateField(
         _('birthday'),
-        null=True,
         help_text="Enter your birthday."
+    )
+
+    gender = models.CharField(
+        max_length=10
     )
 
     # Administrative Info
