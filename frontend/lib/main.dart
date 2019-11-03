@@ -482,18 +482,31 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
                     ListTile(
                       title: Text('Severity of Situation', textScaleFactor: 1.1, textAlign: TextAlign.center,),
                     ),
-                    CheckboxListTile(
-//                      onChanged: (bool checked) {
-//                        severity = 3;
-//                    },
+                    ListTile(
+                      selected: true,
+                      onTap: () {
+
+                        severity = 3;
+                        },
                       title: Text('High'),
+                      subtitle: Text('Immediate Emergency'),
 
                     ),
                     ListTile(
+                      onTap: () {
+
+                        severity = 2;
+                      },
                       title: Text('Medium'),
+                      subtitle: Text('Moderate Urgency'),
                     ),
                     ListTile(
+                      onTap: () {
+
+                        severity = 1;
+                      },
                       title: Text('Low'),
+                      subtitle: Text('Low Priority'),
                     ),
                   ],
                 ),
@@ -503,15 +516,31 @@ class MyCustomFormStatePrimaryRequest extends State<MyCustomFormPrimaryRequest> 
                       title: Text('Items', textScaleFactor: 1.1, textAlign: TextAlign.center,),
                     ),
                     ListTile(
+                      onTap: () {
+
+                        item = "Food/Water";
+                      },
                       title: Text('Food/water'),
                     ),
                     ListTile(
+                      onTap: () {
+
+                        item = "Clothing";
+                      },
                       title: Text('Clothing'),
                     ),
                     ListTile(
+                      onTap: () {
+
+                        item = "Shelter";
+                      },
                       title: Text('Shelter'),
                     ),
                     ListTile(
+                      onTap: () {
+
+                        item = "Toiletries";
+                      },
                       title: Text('Toiletries'),
                     ),
                     Container(
