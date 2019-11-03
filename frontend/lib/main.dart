@@ -319,6 +319,9 @@ class LaunchPage extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              const Image(
+                image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+              ),
               RaisedButton(
                 onPressed: () {
                   Navigator.push(

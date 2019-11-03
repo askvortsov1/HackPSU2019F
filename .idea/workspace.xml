@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/frontend/lib/main.dart" line="493" />
+    <bookmark url="file://$PROJECT_DIR$/frontend/lib/main.dart" line="496" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e633d2b-3b23-4a30-b772-99c883394567" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/HackPSU2019F.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/HackPSU2019F.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/lib/main.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,8 +23,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="635" column="12" selection-start-line="635" selection-start-column="12" selection-end-line="635" selection-end-column="12" />
+            <state relative-caret-position="205">
+              <caret line="322" column="70" lean-forward="true" selection-start-line="322" selection-start-column="70" selection-end-line="322" selection-end-column="70" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
                 <element signature="e#207#464#0" />
@@ -36,7 +33,6 @@
                 <element signature="e#207#450#0" />
                 <element signature="e#508#595#0" />
                 <element signature="e#734#4144#0" />
-                <element signature="e#210#3123#0" />
                 <element signature="e#13036#13293#0" />
                 <element signature="e#13336#13423#0" />
                 <element signature="e#13580#17041#0" />
@@ -48,6 +44,11 @@
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/lib/I Help.png">
+          <provider selected="true" editor-type-id="images" />
         </entry>
       </file>
     </leaf>
@@ -192,7 +193,7 @@
     <frame x="-6" y="-6" width="1292" height="692" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" visible="true" weight="0.32928804" />
+      <window_info active="true" content_ui="combo" id="Project" visible="true" weight="0.32928804" />
       <window_info id="Structure" side_tool="true" />
       <window_info id="Image Layers" />
       <window_info id="Designer" />
@@ -203,7 +204,7 @@
       <window_info anchor="bottom" id="Dart Analysis" sideWeight="0.49919093" weight="0.32978722" />
       <window_info anchor="bottom" id="Version Control" weight="0.32978722" />
       <window_info anchor="bottom" id="TODO" weight="0.32978722" />
-      <window_info active="true" anchor="bottom" id="Run" sideWeight="0.49919093" visible="true" weight="0.32978722" />
+      <window_info anchor="bottom" id="Run" sideWeight="0.49919093" visible="true" weight="0.32978722" />
       <window_info anchor="bottom" id="Debug" />
       <window_info anchor="bottom" id="Terminal" sideWeight="0.49919093" weight="0.32978722" />
       <window_info anchor="bottom" id="Event Log" sideWeight="0.5008091" side_tool="true" visible="true" weight="0.32978722" />
@@ -246,10 +247,13 @@
     <entry file="file://$PROJECT_DIR$/frontend/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/lib/I Help.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="635" column="12" selection-start-line="635" selection-start-column="12" selection-end-line="635" selection-end-column="12" />
+        <state relative-caret-position="205">
+          <caret line="322" column="70" lean-forward="true" selection-start-line="322" selection-start-column="70" selection-end-line="322" selection-end-column="70" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
             <element signature="e#207#464#0" />
@@ -258,7 +262,6 @@
             <element signature="e#207#450#0" />
             <element signature="e#508#595#0" />
             <element signature="e#734#4144#0" />
-            <element signature="e#210#3123#0" />
             <element signature="e#13036#13293#0" />
             <element signature="e#13336#13423#0" />
             <element signature="e#13580#17041#0" />
